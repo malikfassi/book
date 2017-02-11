@@ -1,0 +1,73 @@
+<div id="add-group" ng-controller="addGroupController" ng-init="init('create')">
+	<div id="add-group-wrapper" class="tiles tiles-border">
+		<form ng-submit="addGroup()">
+			<div id="addnew-header">
+				<input id="group-name" ng-model="group_name" placeholder="Enter Group Name"/>
+				<div id="icons">
+					<div id="camera-icon" click-on="#inputPict" class="round-pict grow"></div>
+					<input input-loader id="inputPict" type="file" accept="image/*"/>
+				</div>
+				<span><a href="#">Click here to upload an image</a></span>
+			</div>
+			<div id="description">
+				<textarea ng-model="description" placeholder="Enter a description"></textarea> 
+			</div>
+			<div id="privacy-title"> Privacy </div>
+			<div id="is-private">
+				<div ng-class="{'open-icon-green': privacy == 0}" class="open-icon" ng-click="privacy = 0"></div>
+				<span ng-class="{'privacy-active': privacy == 0}" class="privacy" ng-click="privacy = 0">Open</span>
+				<div ng-class="{'private-icon-green': privacy == 1}" class="private-icon" ng-click="privacy = 1"></div>
+				<span ng-class="{'privacy-active': privacy == 1}" class="privacy" ng-click="privacy = 1">Private</span>
+				<div ng-class="{'protected-icon-green': privacy == 2}" class="protected-icon" ng-click="privacy = 2"></div>
+				<span ng-class="{'privacy-active': privacy == 2}" class="privacy" ng-click="privacy = 2">Restricted</span>
+			</div>
+			<div ng-hide="!loadedData" id="pictures">
+				<span>Uploaded file</span>
+				<div ng-if="!loadedData.type" class="round-pict pict" back-img="{{loadedData}}"></div>
+				<div ng-if="loadedData.type == 'video/mp4'" id="big-video-icon" class="round-pict grow"></div>
+			</div>
+			<div id="addgroup-confirm">
+				<div class="addgroup-buttons"><a ng-href="/">Cancel</a></div>
+				<input class="addgroup-buttons" value="Create Event" type="submit"/>
+			</div>
+			<div id="addgroup-confirm">
+				<div class="addgroup-buttons"><a ng-href="/">Cancel</a></div>
+				<input class="addgroup-buttons" value="Add Group" type="submit"/>
+			</div>
+		</form>
+	</div>
+					      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup tiles">
+		<div id="round-close" ng-click="closeDrop()" class="grow">
+			X
+		</div>
+		<div ng-hide="popup != 0" id="photo-add" ng-hide="">
+			<div id="photo-container">
+				<div id="remove-button" display-when-hover="
+				#img" class="grow" ng-click="removePict(selectedPicture)">✖</div>
+				<img id="img" img-src="{{selectedPicture.link}}"/>
+			</div>
+		</div>
+		<div ng-hide="popup != 1" id="add-group-popup">
+			<div id="add-group-popup-wrapper">
+				<div id="allgroups">
+					<div class="comments-container" ng-repeat="group in allGroups">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{group.name}}</div>
+							</div>
+							<div id="checkgroups">
+								<input ng-click="selectGroup(group)" type="checkbox"/>
+								<div ng-click="selectGroup(group)" ng-show="group.checked"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div id="error">
+		</div>
+	</div>
+</div>

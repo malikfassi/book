@@ -1,0 +1,57 @@
+<div id="add-post" ng-controller="addPollController">
+	<div id="add-post-wrapper" class="tiles tiles-border">
+		<form ng-submit="postPoll()">
+			<div id="addnew-header">
+				<div id="poll-icon-title"></div>
+				<input id="poll-title" ng-model="question" placeholder="Enter Your Question"/>
+			</div>
+			<div id="poll-choices">
+				<div ng-repeat="choice in choices">
+					<input placeholder="Enter Option {{$index + 1}}"  type="text" ng-model="choices[$index].data"/>
+				</div>
+				<span scroll-on-click ng-click="addChoice()">+ Add Option</span>
+			</div>
+			<div id="members">
+				<span>Add groups</span>
+				<div id="members-pict">
+					<div id="member" ng-repeat="group in allGroups" ng-click="selectGroup(group)" ng-if="group.checked">
+						<div class="round-pict tiles-pict hoverblur" back-img="{{group.picture_url_thumb}}" alt=""></div>
+						<div class="cross">✖</div>
+					</div>
+					<div dropdown="popup" ng-click="popup=0" popup=".popup" height="80" width="20" class="round-pict grow plus"></div>
+				</div>
+			</div>
+			<div id="addgroup-confirm">
+				<div class="addgroup-buttons"><a ng-href="/">Cancel</a></div>
+				<input class="addgroup-buttons" value="Create Poll" type="submit"/>
+			</div>
+		</form>
+	</div>
+					      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+		<div id="round-close" ng-click="closeDrop()" class="grow">
+			X
+		</div>
+		<div ng-hide="popup != 0" id="add-group-popup">
+			<div id="add-group-popup-wrapper">
+				<div id="allgroups">
+					<div class="comments-container" ng-repeat="group in allGroups">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{group.name}}</div>
+							</div>
+							<div id="checkgroups">
+								<input ng-click="selectGroup(group)" type="checkbox"/>
+								<div ng-click="selectGroup(group)" ng-show="group.checked"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="error">
+		</div>
+	</div>
+</div>

@@ -1,0 +1,184 @@
+<div id="feed">
+	<span id="error" ng-repeat="error in errors">{{error}} <br/></span>
+	<div id="pagination-wrapper" class="tiles">
+
+		<div ng-click="getStory()" ng-show="story == 'all'" id="top-story" class="grow">
+			TOP STORIES
+		</div>
+		<div ng-click="getStory()" ng-show="story == 'top'" id="top-story" class="grow">
+			ALL STORIES
+		</div>
+
+
+		<div id="pagination">
+			<div class="grow" id="previous" ng-cloak ng-show="previous_page">
+				<div class="pagination-arrow"></div>
+				<a class="grow" ng-click="goToPage(previous_page)">previous</a>
+			</div>
+			<div class="grow" id="next" ng-cloak ng-show="next_page != -1 && next_page != undefined">
+				<div class="pagination-arrow"></div>
+				<a ng-click="goToPage(next_page)">next</a>
+			</div>
+		</div>
+		<div style="clear: both"></div>
+	</div>
+	<div class="tiles tiles-border" ng-repeat="content in contents">
+		<div ng-if="content.type == 'Post'">
+			<div class="tiles-content-container">
+				<div>
+					<div class="wrapper">
+						<div class="round-pict tiles-pict" back-img="{{content.user.picture_url_thumb}}" alt=""></div>
+						<div class="title-container tiles-title">{{content.user.name}}</div>
+					</div>
+					<span class="title-time title-container">{{content.date}}</span>
+				</div>
+				<div class="article-container">
+					<div class="article-title">{{content.entry.posttitle}}</div>
+					<div class="article-content">
+						{{content.entry.post}}
+					</div>
+					<a class="article-link" ng-hide="!content.entry.postlink" href="{{content.entry.postlink}}">Original post</a>
+				</div>
+				<div class="detail-container">
+					<div>
+						<div class="detail" ng-click="selectPost(content, 0)" dropdown="popup" popup=".popup" width="83%"><span ng-class="{'green_comment' : content.comments.total_comments, 'comments-icon': !content.comments.total_comments}" class="icon-detail"></span><span>{{content.comments.total_comments}} COMMENTS</span></div>
+						<div class="detail">
+							<span  ng-click="selectPost(content, 1); likePost()" ng-class="{'red_like' : content.liked, 'like-icon': !content.liked}" class="icon-detail"></span>
+							<span  ng-click="selectPost(content, 1)" dropdown="popup" popup=".popup" width="290px">{{content.likes.total_likes}} LIKES</span>
+						</div>
+						<div class="detail" ng-click="selectPost(content, 2)" dropdown="popup" popup=".popup" width="90px"><span class="icon-detail share-icon" src="images/share.png"></span><span> SHARE</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="content.type == 'Poll'">
+			<div class="tiles-content-container">
+				<div>
+					<div class="wrapper">
+						<div class="round-pict tiles-pict" back-img="{{content.user.picture_url_thumb}}" alt=""></div>
+						<div class="title-container tiles-title">{{content.user.name}}</div>
+					</div>
+					<span class="title-time title-container">{{content.date}}</span>
+				</div>
+				<div class="article-container">
+
+					<div class="article-title">{{content.entry.post}}</div>
+					<form class="rsvp" ng-controller="pollController" ng-init="init(content)">
+						<div class="choice" ng-repeat="data in content.entry.anwsers">
+							<input ng-click="vote($index)" ng-class="{'attending_selected': choiceVote == $index}" class="attending" type="radio" ng-checked="choiceVote == $index"/>
+							<span ng-class="{'attending_selected': choiceVote == $index}" ng-click="vote($index)">{{data.answer}}</span>
+							<span ng-show="hasVoted">({{data.votes}}/{{content.entry.total_votes}})</span>
+						</div>
+					</form>
+					<a class="article-link" href="http://ita.cx/1nlxBfN">{{content.entry.postlink}}</a>
+					<div class="detail-container">
+						<div>
+							<div class="detail" ng-click="selectPost(content, 0)" dropdown="popup" popup=".popup" width="83%"><span ng-class="{'green_comment' : content.comments.total_comments, 'comments-icon': !content.comments.total_comments}" class="icon-detail"></span><span>{{content.comments.total_comments}} COMMENTS</span></div>
+							<div class="detail">
+								<span  ng-click="selectPost(content, 1); likePost()" ng-class="{'red_like' : content.liked, 'like-icon': !content.liked}" class="icon-detail"></span>
+								<span  ng-click="selectPost(content, 1)" dropdown="popup" popup=".popup" width="290px">{{content.likes.total_likes}} LIKES</span>
+							</div>
+							<div class="detail" ng-click="selectPost(content, 2)" dropdown="popup" popup=".popup" width="90px"><span class="icon-detail share-icon" src="images/share.png"></span><span> SHARE</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="pagination-wrapper" class="tiles">
+		<div id="pagination">
+			<div class="grow" id="previous" ng-show="previous_page">
+				<div class="pagination-arrow"></div>
+				<a class="grow" ng-click="goToPage(previous_page)">previous</a>
+			</div>
+			<div class="grow" id="next" ng-show="next_page != -1 && next_page != undefined">
+				<div class="pagination-arrow"></div>
+				<a ng-click="goToPage(next_page)">next</a>
+			</div>
+		</div>
+	</div>
+		      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+
+			<div id="round-close" ng-click="closeDrop()" class="grow">
+				X
+			</div>
+			<div id="comments-popup" ng-hide="popup != 0">
+				<div id="comments-wrapper">
+					<div class="tiles-border">
+						<div>
+							<div id="popup-header">
+								<div id="pict-name">
+									<div class="round-pict tiles-pict" back-img="{{selectedPost.user.picture_url_thumb}}" alt=""></div>
+									<div class="title-container tiles-title">{{selectedPost.user.name}}</div>
+								</div>
+								<span class="title-time title-container">{{selectedPost.date}}</span>
+							</div>
+							<div class="article-container">
+								<div class="article-title">{{selectedPost.entry.posttitle}}</div>
+								<div class="article-content">
+									{{selectedPost.entry.post}}
+								</div>
+								<a class="article-link" href="http://ita.cx/1nlxBfN">{{selectedPost.entry.postlink}}</a>
+							</div>
+						</div>
+					</div>
+					<div id="post-comments">
+						<div id="comment-input-container" class="comments-container">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{user.first_name}} {{user.last_name}}</div>
+								</div>
+							</div>
+							<form ng-submit="commentPost()">
+								<div id="text-container">
+									<textarea ng-model="comment"rows="4" placeholder="say something..." name="comment"/>
+								</div>
+								<input type="submit" value="ok">
+							</form>
+						</div>
+						<div class="comments-container" ng-repeat="comment in selectedPost.comments.user_comments">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{comment.from_name}}</div>
+								</div>
+							</div>
+							<span class="comment">{{comment.comment}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-hide="popup != 1" id="likes-popup">
+				<div id="like-wrapper">
+					<div id="likes">
+						<div class="comments-container" ng-repeat="like in selectedPost.likes.user_likes">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{like.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{like.from_name}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-hide="popup != 2" id="share-popup">
+				<div id="share-wrapper">
+					<div id="popup-title">
+						Share on your social network
+					</div>
+					<div id="social-logos">
+						<div id="twitter-logo"></div>
+						<div id="facebook-logo"></div>
+						<div id="google-logo"></div>
+					</div>
+					<div id="ok-button">
+						<input type="button" ng-click="closeDrop()" value="ok"/>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>

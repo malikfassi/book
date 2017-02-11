@@ -1,0 +1,101 @@
+<!doctype html>
+<html class="no-js" ng-app="itaAccessApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title></title>
+    <meta name="description" content="">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="css/main.css">
+    <script src="scripts/config.js"></script>
+    
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="scripts/jqueryEase.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/factories/dataFactory.js"></script>
+    <script src="scripts/factories/userLogin.js"></script>
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/modernizr.js"></script>
+    <script src="scripts/timeago.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/rootscope.js"></script>
+    <script src="scripts/controllers/eventsController.js"></script>
+    <script src="scripts/controllers/addGroupController.js"></script>
+    <script src="scripts/controllers/profileController.js"></script>
+    <script src="scripts/controllers/peopleController.js"></script>
+    <script src="scripts/controllers/addEventController.js"></script>
+    <script src="scripts/controllers/addPostController.js"></script>
+    <script src="scripts/controllers/addPollController.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/feedController.js"></script>
+    <script src="scripts/controllers/pollController.js"></script>
+    <script src="scripts/controllers/photosController.js"></script>
+    <script src="scripts/controllers/allNotificationsController.js"></script>
+    <script src="scripts/directives/navbar.js"></script>
+    <script src="scripts/directives/closeDrop.js"></script>
+    <script src="scripts/directives/resp-navbar.js"></script>
+    <script src="scripts/directives/noScroll.js"></script>
+    <script src="scripts/directives/backImg.js"></script>
+    <script src="scripts/directives/dropdowns.js"></script>
+    <script src="scripts/directives/popup.js"></script>
+    <script src="scripts/directives/focusMe.js"></script>
+    <script src="scripts/directives/clickOn.js"></script>
+    <script src="scripts/directives/maxHeight.js"></script>
+    <script src="scripts/directives/scrollTo.js"></script>
+    <script src="scripts/directives/inputLoader.js"></script>
+    <script src="scripts/directives/displayWhenHover.js"></script>
+    <script src="scripts/directives/calendar.js"></script>
+    <script src="scripts/directives/scrollOnClick.js"></script>
+    <script src="scripts/directives/preventKeyboardBug.js"></script>
+    <script src="scripts/directives/columnsHandler.js"></script>
+    <script src="scripts/filters/filters.js"></script>
+    <!-- endbuild -->
+</head>
+<body ng-controller="MainCtrl">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+      <!-- Add your site or application content here -->
+      <navbar   prevent-keyboard-bug  ng-hide="!isLogged()"></navbar>
+      <div id="page-wrap">
+        <img id="loader" ng-show="loading" src="images/ajax-loader.gif"/>
+        <div ng-show="!loading" id="main-wrapper" ng-view></div>
+    </div>
+  <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+
+    <!-- endbuild -->
+</body>
+</html>

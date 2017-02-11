@@ -1,0 +1,70 @@
+.fw {
+    width: 100%;
+    margin-bottom: 28px;
+}
+.left {
+    text-align: left;
+}
+.custom-radio,.custom-checkbox{
+    position:relative;
+    display: inline-block;
+    text-align: left;
+    padding: 7px 26px;
+    label{
+       // margin-left:40px;//25 + 15;
+        text-align: left;
+        font-size: 20px;
+    }
+    label:hover{ cursor:pointer;}
+    label:before{
+        content:"";
+        width: 14px;  
+        height: 14px;
+        position:absolute;
+        left:0px;
+        top:19px;
+        background-color:#FFF;
+        // background, fontsize, color, border
+        border: 1px solid #DDD;
+        color:#333;
+        line-height:11px;
+        margin-top:-12.5px;
+        text-align: center;
+
+        
+        
+    }
+    label:hover:before { 
+        border: 1px solid #AAA;
+
+    }
+    
+}
+.custom-checkbox{
+    input[type=checkbox] {
+	    display: none;
+    }
+    input[type=checkbox]:checked + label:before { 
+        content: "\000D7";
+        font-size: 11px;
+        color: #AAA;
+    }
+}
+.custom-radio{
+   input[type=radio] {
+	    display: none;
+    }
+    label:before {
+        // BORDER RADIUS
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+    }
+    input[type=radio]:checked + label:before { 
+        content: "\25C9";
+        font-size: 20px;
+        color: #AAA;
+    }
+}

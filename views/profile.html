@@ -1,0 +1,341 @@
+<div id="profile-page"  ng-controller="profileController">
+	<div id="profilewrapper">
+		<div id="profile" class="tiles tiles-border"  ng-class="{'hidden':edit, 'active': !edit}">
+			<div id="addnew-header">
+				<div class="round-pict tiles-pict" back-img="{{currentUser.picture_url_thumb}}"></div>
+				<div id="profile-name">{{currentUser.first_name}} {{currentUser.last_name}}</div>
+			</div>
+			<div id="description" class="profile-description">
+				<div ng-show="currentUser.job_title"><span>Job title </span> {{currentUser.job_title}}</div>
+				<div ng-show="currentUser.department"><span>Department </span> {{currentUser.department}}</div>
+				<div ng-show="currentUser.email"><span>Email </span> {{currentUser.email}}</div>
+				<div ng-show="currentUser.mobile_no"><span>Mobile </span> {{currentUser.mobile_no}}</div>
+				<div ng-show="currentUser.office_no"><span>Office </span> {{currentUser.office_no}}</div>
+				<div ng-show="currentUser.website"><span>Website </span> {{currentUser.website}}</div>
+			</div>
+			<div id="index-photos">
+				<span>{{currentUser.pictures.length}} photos</span>
+				<span><span>SEE ALL</span><div></div></span>
+			</div>
+			<div id="members">
+				<span>Groups</span>
+				<div id="members-pict">
+					<div id="member" ng-repeat="group in user.groups">
+						<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}" alt=""></div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="user.id == currentUser.id" id="addgroup-confirm">
+				<span><a ng-click="editProfile()">Edit profile</a></span>
+			</div>
+		</div>
+		<div id="profile" class="tiles tiles-border editprofile" ng-hide="!edit">
+			<form ng-submit="editProfile()">
+				<div id="addnew-header">
+					<div class="round-pict tiles-pict" back-img="{{newUser.picture_url_thumb}}"></div>
+					<div id="input-name">
+						<input type="text" id="input-firstname" ng-model="newUser.first_name" placeholder="Firstname"/>
+						<input type="text" id="input-lastname"  ng-model="newUser.last_name" placeholder="Lastname"/>
+					</div>
+					<div id="icons">
+						<div id="camera-icon" click-on="#inputPict" class="round-pict grow"></div>
+						<input input-loader id="inputPict" type="file" accept="image/*"/>
+					</div>
+					<span click-on="#inputPict">Click here to upload an image</span>
+				</div>
+				<div id="description" class="profile-description">
+					<span>Job Title</span><input type="text" placeholder="Job Title" ng-model="newUser.job_title"/>			
+					<br/>
+					<span>Department</span><input type="text" placeholder="Department" ng-model="newUser.department"/>
+					<br/>
+					<span>Email</span> <input type="text" placeholder="Email" ng-model="newUser.email"/>
+					<br/>
+					<span>Mobile</span><input type="text" placeholder="Mobile" ng-model="newUser.mobile_no"/>
+					<br/>
+					<span>Office</span><input type="text" placeholder="Office" ng-model="newUser.office_no"/>
+					<br/>
+					<span>Website</span><input type="text" placeholder="Website" ng-model="newUser.website"/>
+				</div>
+				<div id="index-photos">
+					<span>237 photos</span>
+					<span><span>SEE ALL</span><div></div></span>
+				</div>
+				<div id="members">
+					<span>Groups</span>
+					<div id="members-pict">
+						<div id="member" ng-repeat="group in newUser.groups" ng-click="selectGroup(group)" class="hoverblur">
+							<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}" alt=""></div>
+							<div class="cross">✖</div>
+						</div>
+						<div dropdown="popup" ng-click="popup=1" popup=".popup" width="20" class="round-pict grow plus"></div>
+					</div>
+				</div>
+				<div id="addgroup-confirm">
+					<div class="addgroup-buttons" ng-click="editProfile()">Cancel</div>
+					<span><input type="submit" value="Save Changes" ng-click="editProfile()"/></span>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="tiles tiles-border" ng-repeat="content in user.posts" ng-if="content.type != 'Photo'">
+		<a class="remove-post" ng-hide="!edit" ng-click="removePost(content)"><span class="shrink">Remove</span></a>
+		<div ng-if="content.type == 'Post'">
+			<div class="tiles-content-container">
+				<div>
+					<div class="wrapper">
+						<div class="round-pict tiles-pict" back-img="{{content.user.picture_url_thumb}}" alt=""></div>
+						<div class="title-container tiles-title">{{content.user.name}}</div>
+					</div>
+					<span class="title-time title-container">{{content.date}}</span>
+				</div>
+				<div class="article-container">
+					<div class="article-title">{{content.entry.posttitle}}</div>
+					<div class="article-content">
+						{{content.entry.post}}
+					</div>
+					<a class="article-link" href="http://ita.cx/1nlxBfN">{{content.entry.postlink}}</a>
+				</div>
+				<div class="detail-container">
+					<div>
+						<div class="detail" ng-click="selectPost(content, 0)" dropdown="popup" popup=".popup" width="83%"><span ng-class="{'green_comment' : content.comments.total_comments, 'comments-icon': !content.comments.total_comments}" class="icon-detail"></span><span>{{content.comments.total_comments}} COMMENTS</span></div>
+						<div class="detail">
+							<span  ng-click="selectPost(content, 1); likePost()" ng-class="{'red_like' : content.liked, 'like-icon': !content.liked}" class="icon-detail"></span>
+							<span  ng-click="selectPost(content, 1)" dropdown="popup" popup=".popup" width="290px">{{content.likes.total_likes}} LIKES</span>
+						</div>
+						<div class="detail" ng-click="selectPost(content, 2)" dropdown="popup" popup=".popup" width="90px"><span class="icon-detail share-icon" src="images/share.png"></span><span> SHARE</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="content.type == 'Event'" ng-controller="eventController" ng-init="init(content)">
+			<div class="event-container">
+				<div class="event-header">
+					<div class="round-pict tiles-pict" back-img="{{content.user.picture_url_thumb}}" alt=""></div>
+					<div id="event-name-details">
+						<div class="tiles-title event-title">{{content.entry.name}}</div>
+						<div class="event-time-pub">{{content.entry.created_at | date:1:0}} <div> by <span>{{content.user.name}}</span></div></div>
+					</div>
+				</div>
+				<div class="event-time-loc">
+					<div><div class="calendar-icon"></div><div class="event-time">{{content.entry.event_date | date:0:1}}</div></div>
+					<div><div class="geoloc-icon"></div><div class="event-loc">
+					{{content.entry.location_name}}</div><a class="arrow-icon" href=""></a></div>
+				</div>
+				<div class="event-short-descr">
+					{{content.entry.description}}
+					<a>{{content.link}}</a>
+				</div>
+				<div class="rsvp-attendees">
+					<form class="rsvp">
+						<div class="choice"><input ng-click="rsvp(0)" ng-class="{'attending_selected': content.is_attending == 0}" class="attending" type="radio" ng-checked="content.is_attending == 0"/> <span ng-class="{'attending_selected': content.is_attending == 0}" ng-click="rsvp(0)">ATTENDING</span></div>
+						<div class="choice"><input ng-click="rsvp(1)" ng-class="{'maybe_selected': content.is_attending == 1}" class="maybe" type="radio" ng-checked="content.is_attending == 1"/> <span ng-class="{'maybe_selected': content.is_attending == 1}" ng-click="rsvp(1)">MAYBE</span></div>
+						<div class="choice"><input ng-class="{'not_attending_selected': content.is_attending == 2}" ng-click="rsvp(2)" class="not_attending" type="radio" ng-checked="content.is_attending == 2"/><span ng-class="{'not_attending_selected': content.is_attending == 2}" ng-click="rsvp(2)">NOT ATTENDING</span></div>
+					</form>
+					<div class="attendees">
+						<div ng-repeat="attendee in content.attending_list | limitTo:10" class="round-pict tiles-pict" back-img="{{attendee.user.picture_url_thumb}}" alt=""></div>
+
+						<!-- ATTENDING -->
+						<span class="attending" ng-show="content.attending_list.length > 1 && content.attending_list.length <= 10">are attending this event.</span>
+						<span class="attending" ng-show="content.attending_list.length == 0">nobody is <span class="green">attending</span> this event.</span>
+						<span class="attending" ng-show="content.attending_list.length == 1"> is <span class="green">attending</span> this event.</span>
+						<span class="attending" ng-show="content.attending_list.length > 10">and <span ng-click="selectPost(content.attending_list, 1)" dropdown="popup" popup=".popup" width="290px">{{content.attending_list.length - 10}} others</span> are <span class="green">attending</span> this event</span>
+
+						<!-- MAYBE ATTENDING -->
+						<span class="other_attendees" ng-show="content.maybe_list.length > 1 && content.maybe_list.length <= 10 && show "> {{content.maybe_list.length}} people are <span class="yellow">maybe</span> attending this event.</span>
+						<span class="other_attendees" ng-show="content.maybe_list.length == 0 && show"> nobody is <span class="yellow">maybe</span> attending this event.</span>
+						<span class="other_attendees" ng-show="content.maybe_list.length == 1 && show"> 1 person is <span class="yellow">maybe</span> attending this event.</span>
+						<span class="other_attendees" ng-show="content.maybe_list.length > 10 && show"> {{content.maybe_list.length}} people are <span class="yellow">maybe</span> attending this event</span>
+						
+						<!-- NOT ATTENDING -->
+						<span class="other_attendees" ng-show="content.not_attending_list.length == 0 && show">nobody is <span class="red">not attending</span> this event.</span>
+						<span class="other_attendees" ng-show="content.not_attending_list.length == 1 && show"> 1 person is <span class="red">not attending</span> this event.</span>
+						<span class="other_attendees" ng-show="content.not_attending_list.length > 1 && show"> {{content.not_attending.length}} people are <span class="red">not attending</span> this event</span>
+						
+						<!-- INVITED -->
+						<span class="other_attendees" ng-show="content.invited_list.length == 0 && show">nobody is invited to this event.</span>
+						<span class="other_attendees" ng-show="content.invited_list.length == 1 && show"> 1 person is invited to this event.</span>
+						<span class="other_attendees" ng-show="content.invited_list.length > 1 && show"> {{content.invited_list.length}} people are invited to this event</span>
+
+						<span ng-click="show=true" ng-show="!show" id="show_more">more ...</span>
+						<span ng-click="show=false" ng-show="show" id="show_more">less ...</span>
+					</div>
+				</div>
+				<div id="event-details" class="detail-container">
+					<div>
+						<div class="detail" ng-click="selectPost(content, 3)" dropdown="popup" popup=".popup" width="83%"><span ng-class="{'green_comment' : content.comments.total_comments, 'comments-icon': !content.comments.total_comments}" class="icon-detail"></span><span>{{content.comments.total_comments}} COMMENTS</span></div>
+						<div class="detail">
+							<span ng-click="selectPost(content, 1); likePost()" ng-class="{'red_like' : content.liked, 'like-icon': !content.liked}" class="icon-detail"></span>
+							<span ng-click="selectPost(content.likes.user_likes, 1)" dropdown="popup" popup=".popup" width="290px" >{{content.likes.total_likes}} LIKES</span>
+						</div>
+						<div class="detail" ng-click="selectPost(content, 2)" dropdown="popup" popup=".popup" width="90px"><span class="icon-detail share-icon" src="images/share.png"></span><span> SHARE</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="content.type == 'Poll'">
+			<div class="tiles-content-container">
+				<div>
+					<div class="wrapper">
+						<div class="round-pict tiles-pict" back-img="{{content.user.picture_url_thumb}}" alt=""></div>
+						<div class="title-container tiles-title">{{content.user.name}}</div>
+					</div>
+					<span class="title-time title-container">{{content.date}}</span>
+				</div>
+				<div class="article-container">
+
+					<div class="article-title">{{content.entry.post}}</div>
+					<form class="rsvp" ng-controller="pollController" ng-init="init(content)">
+						<div class="choice" ng-repeat="data in content.entry.anwsers">
+							<input ng-click="vote($index)" ng-class="{'attending_selected': choiceVote == $index}" class="attending" type="radio" ng-checked="choiceVote == $index"/>
+							<span ng-class="{'attending_selected': choiceVote == $index}" ng-click="vote($index)">{{data.answer}}</span>
+							<span ng-show="hasVoted">({{data.votes}}/{{content.entry.total_votes}})</span>
+						</div>
+					</form>
+					<a class="article-link" href="http://ita.cx/1nlxBfN">{{content.entry.postlink}}</a>
+					<div class="detail-container">
+						<div>
+							<div class="detail" ng-click="selectPost(content, 0)" dropdown="popup" popup=".popup" width="83%"><span ng-class="{'green_comment' : content.comments.total_comments, 'comments-icon': !content.comments.total_comments}" class="icon-detail"></span><span>{{content.comments.total_comments}} COMMENTS</span></div>
+							<div class="detail">
+								<span  ng-click="selectPost(content, 1); likePost()" ng-class="{'red_like' : content.liked, 'like-icon': !content.liked}" class="icon-detail"></span>
+								<span  ng-click="selectPost(content, 1)" dropdown="popup" popup=".popup" width="290px">{{content.likes.total_likes}} LIKES</span>
+							</div>
+							<div class="detail" ng-click="selectPost(content, 2)" dropdown="popup" popup=".popup" width="90px"><span class="icon-detail share-icon" src="images/share.png"></span><span> SHARE</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+		<div id="comments-popup" ng-hide="popup != 0">
+			<div id="comments-wrapper">
+				<div class="tiles-border">
+					<div>
+						<div>
+							<div class="round-pict tiles-pict" back-img="{{selectedPost.user.picture_url_thumb}}" alt=""></div>
+							<div class="title-container tiles-title">{{selectedPost.user.name}}</div>
+							<span class="title-time title-container">{{selectedPost.date}}</span>
+						</div>
+						<div class="article-container">
+							<div class="article-title">{{selectedPost.entry.posttitle}}</div>
+							<div class="article-content">
+								{{selectedPost.entry.post}}
+							</div>
+							<a class="article-link" href="http://ita.cx/1nlxBfN">{{selectedPost.entry.postlink}}</a>
+						</div>
+					</div>
+				</div>
+				<div id="post-comments">
+					<div id="comment-input-container" class="comments-container">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{user.first_name}} {{user.last_name}}</div>
+							</div>
+						</div>
+						<form ng-submit="commentPost()">
+							<div id="text-container">
+								<textarea ng-model="comment"rows="4" placeholder="say something..." name="comment"/>
+							</div>
+							<input type="submit" value="ok">
+						</form>
+					</div>
+					<div class="comments-container" ng-repeat="comment in selectedPost.comments.user_comments">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{comment.from_name}}</div>
+							</div>
+						</div>
+						<span class="comment">{{comment.comment}}</span>
+					</div>
+				</div>
+			</div>
+			<!-- WWTTTTFFF ???
+			<div id="close-button">
+				<input type="button" ng-click="closeDrop()"value="close"/>
+			</div>-->
+		</div>
+		<div ng-hide="popup != 1" id="likes-popup">
+			<div id="like-wrapper">
+				<div id="likes">
+					<div class="comments-container" ng-repeat="like in selectedPost.likes.user_likes">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{like.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{like.from_name}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="close-button">
+					<input type="button" ng-click="closeDrop()"value="close"/>
+				</div>
+			</div>
+		</div>
+		<div ng-hide="popup != 2" id="share-popup">
+			<div id="share-wrapper">
+				<div id="popup-title">
+					Share on your social network
+				</div>
+				<div id="social-logos">
+					<div id="twitter-logo"></div>
+					<div id="facebook-logo"></div>
+					<div id="google-logo"></div>
+				</div>
+				<div id="ok-button">
+					<input type="button" ng-click="closeDrop()" value="ok"/>
+				</div>
+			</div>
+		</div>
+		<div id="comments-popup" ng-hide="popup != 3">
+			<div id="comments-wrapper">
+				<div class="tiles-border">
+				<div class="event-header">
+					<div class="round-pict tiles-pict" back-img="{{selectedPost.user.picture_url_thumb}}" alt=""></div>
+					<div id="event-name-details">
+						<div class="tiles-title event-title">{{selectedPost.entry.name}}</div>
+						<div class="event-time-pub">{{selectedPost.entry.created_at | date:1:0}} <div> by <span>{{selectedPost.user.name}}</span></div></div>
+					</div>
+				</div>
+				<div class="event-time-loc">
+					<div><div class="calendar-icon"></div><div class="event-time">{{selectedPost.entry.event_date | date:0:1}}</div></div>
+					<div><div class="geoloc-icon"></div><div class="event-loc">
+					{{selectedPost.entry.location_name}}</div><a class="arrow-icon" href=""></a></div>
+				</div>
+				<div class="event-short-descr">
+					{{selectedPost.entry.description}}
+					<a>{{selectedPost.link}}</a>
+				</div>
+					<div id="post-comments">
+						<div id="comment-input-container" class="comments-container">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{user.first_name}} {{user.last_name}}</div>
+								</div>
+							</div>
+							<form ng-submit="commentEvent()">
+								<div id="text-container">
+									<textarea rows="4" ng-model="comment" placeholder="say something..." name="comment"/>
+								</div>
+								<input type="submit" value="ok">
+							</form>
+						</div>
+						<div class="comments-container" ng-repeat="comment in selectedPost.comments.user_comments">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{comment.from_name}}</div>
+								</div>
+								<span class="comment">{{comment.comment}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+[
+  {
+     "firstname" : "{{firstName()}}",
+     "lastname" : "{{surname()}}", 
+      "picture_url_thumb" : "http://api.randomuser.me/portraits/{{random('men','women')}}/{{integer()}}.jpg",
+    "company" : "{{lorem(2, 'words')}}",
+    "departement" : "{{lorem(3, 'words')}}",
+    "job_title" : "{{lorem(2, 'words')}}",
+    "nb_pict" : "{{integer(0, 300)}}",
+    "groups" : [
+      '{{repeat(1,4)}}',
+      {
+        "name" : "{{lorem(integer(1,4), 'words')}}",
+        "picture" : "http://placekitten.com/{{integer(200,300)}}/{{integer(200,400)}}"
+      }
+    ]
+  }
+]

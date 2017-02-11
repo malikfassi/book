@@ -1,0 +1,85 @@
+["{{repeat(50)}}",
+   {
+            "group_id": 0,
+            "group_admin_id": 1,
+            "group_privacy": "Open",
+            "subject_id": 4,
+            "type": "Event",
+            "created_at": "2014-07-04T07:51:21Z",
+            "created_at_stamp": "1404460281",
+            "activity_id": 285,
+            "entry": {
+                "entry_id": 61,
+                "name": "{{lorem(1, 'sentence')}}",
+                  "description": "{{lorem()}}",
+                "event_date":  '{{integer(2014,2030)}}-{{random("01","02","03","04","05","06","07","08","09","10","11","12")}}-{{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30")}} {{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23")}}:{{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59")}}:{{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59")}}',
+                "event_date_to_show": "Thursday, Jul 24 2014, 09:30 AM",
+                "event_date_timestamp": "1406194200",
+                "location_lat": "0",
+                "location_long": "0",
+                  "location_name": "{{city()}}",
+                "created_at":  '{{integer(2014,2030)}}-{{random("01","02","03","04","05","06","07","08","09","10","11","12")}}-{{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30")}} {{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23")}}:{{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59")}}:{{random("01","02","03","04","05","06","07","08","09","10","11","12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59")}}',
+                "created_at_stamp": "1404460281",
+        "picture_url_thumb" : "http://api.randomuser.me/portraits/{{random('men','women')}}/{{integer()}}.jpg",
+                "event_pictures": [],
+                  "attendees": ["{{repeat(1, 10)}}",
+                    {
+                        "attende_id": 70,
+                      "status": "{{random('attending', 'maybe', 'not attenting')}}",
+                        "user": {
+                            "user_id": 1,
+                          "name": "{{firstName()}} {{surname()}} ",
+                            "department": "CB",
+                            "job_title": "Admin",
+                            "picture_url_thumb" : "http://api.randomuser.me/portraits/{{random('men','women')}}/{{integer()}}.jpg",
+                            "picture_url_medium": "http://s3.amazonaws.com/cb.bucket/user_img/m/24nY1402899483.jpg",
+                            "picture_url_original": "http://s3.amazonaws.com/cb.bucket/user_img/l/24nY1402899483.jpg"
+                        }
+                    }
+                ],
+                "attending": 1
+            },
+              "liked": "{{random(0,1,2,3,4,5,6,7,8,9,10)}}",
+            "user": {
+                "user_id": 1,
+                  "name": "{{firstName()}} {{surname()}}",
+                "picture_url_thumb" : "http://api.randomuser.me/portraits/{{random('men','women')}}/{{integer()}}.jpg",
+                "picture_url_medium": "http://s3.amazonaws.com/cb.bucket/user_img/m/24nY1402899483.jpg",
+                "picture_url_original": "http://s3.amazonaws.com/cb.bucket/user_img/l/24nY1402899483.jpg"
+            },
+            "comments": {
+              "total_comments": "{{random(0,1,2,3,4,5,6,7,8,9,10)}}",
+                "user_comments": ["{{repeat(0, 10)}}",
+                    {
+                        "created_at": "2014-07-08T11:05:37Z",
+                        "created_at_stamp": "1404817537",
+                        "comment_id": 39,
+                      "comment": "{{lorem()}}",
+                        "user_id": 1,
+                      "from_name": "{{firstName()}} {{surname()}}",
+                        "picture_url_thumb": "http://api.randomuser.me/portraits/{{random('men','women')}}/{{integer()}}.jpg",
+                        "picture_url_medium": "http://s3.amazonaws.com/cb.bucket/user_img/m/24nY1402899483.jpg",
+                        "picture_url_original": "http://s3.amazonaws.com/cb.bucket/user_img/l/24nY1402899483.jpg",
+                        "likes": {
+                            "total_likes": 0,
+                            "user_likes": [],
+                            "liked": 0
+                        }
+                    }
+                ]
+            },
+            "likes": {
+                "total_likes": 1,
+                "user_likes": [
+                    {
+                        "created_at": "2014-07-08T10:40:17Z",
+                        "created_at_stamp": "1404816017",
+                        "like_id": 187,
+                        "user_id": 1,
+                        "from_name": "ITA ADMIN"
+                    }
+                ]
+            }
+        }
+
+]

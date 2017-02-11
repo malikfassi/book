@@ -1,0 +1,178 @@
+<div id="events">
+	<div id="pagination-wrapper" class="tiles">
+		<div ng-click="getStory()" ng-show="story == 'all'" id="top-story" class="grow">
+			TOP STORIES
+		</div>
+		<div ng-click="getStory()" ng-show="story == 'top'" id="top-story" class="grow">
+			ALL STORIES
+		</div>
+		<div id="pagination">
+			<div class="grow" id="previous" ng-show="previous_page">
+				<div class="pagination-arrow"></div>
+				<a class="grow" ng-click="goToPage(previous_page)">previous</a>
+			</div>
+			<div class="grow" id="next" ng-show="next_page != -1 && next_page != undefined">
+				<div class="pagination-arrow"></div>
+				<a ng-click="goToPage(next_page)">next</a>
+			</div>
+		</div>
+	</div>
+	<div class="tiles tiles-border" id="event-tiles" ng-controller="eventController" ng-repeat="content in contents" ng-init="init(content)">
+		<div class="event-container">
+			<div class="event-header">
+				<div class="round-pict tiles-pict" back-img="{{current_event.user.picture_url_thumb}}" alt=""></div>
+				<div id="event-name-details">
+					<div class="tiles-title event-title">{{current_event.entry.name}}</div>
+					<div class="event-time-pub">{{current_event.entry.created_at | date:1:0}} <div> by <span>{{current_event.user.name}}</span></div></div>
+				</div>
+			</div>
+			<div class="event-time-loc">
+				<div><div class="calendar-icon"></div><div class="event-time">{{current_event.entry.event_date | date:0:1}}</div></div>
+				<div id="geoloc-wrapper"><div class="geoloc-icon"></div><div class="event-loc">
+				{{current_event.entry.location_name}}</div><a class="arrow-icon" href=""></a></div>
+			</div>
+			<div class="event-short-descr">
+				{{current_event.entry.description}}
+				<a>{{current_event.link}}</a>
+			</div>
+			<div class="rsvp-attendees">
+				<form class="rsvp">
+					<div class="choice"><input ng-click="rsvp(0)" ng-class="{'attending_selected': current_event.is_attending == 0}" class="attending" type="radio" ng-checked="current_event.is_attending == 0"/> <span ng-class="{'attending_selected': current_event.is_attending == 0}" ng-click="rsvp(0)">ATTENDING</span></div>
+					<div class="choice"><input ng-click="rsvp(1)" ng-class="{'maybe_selected': current_event.is_attending == 1}" class="maybe" type="radio" ng-checked="current_event.is_attending == 1"/> <span ng-class="{'maybe_selected': current_event.is_attending == 1}" ng-click="rsvp(1)">MAYBE</span></div>
+					<div class="choice"><input ng-class="{'not_attending_selected': current_event.is_attending == 2}" ng-click="rsvp(2)" class="not_attending" type="radio" ng-checked="current_event.is_attending == 2"/><span ng-class="{'not_attending_selected': current_event.is_attending == 2}" ng-click="rsvp(2)">NOT ATTENDING</span></div>
+				</form>
+				<div class="attendees">
+					<div ng-repeat="attendee in current_event.attending_list | limitTo:10" class="round-pict tiles-pict" back-img="{{attendee.user.picture_url_thumb}}" alt=""></div>
+
+					<!-- ATTENDING -->
+					<span class="attending" ng-show="current_event.attending_list.length > 1 && current_event.attending_list.length <= 10">are attending this event.</span>
+					<span class="attending" ng-show="current_event.attending_list.length == 0">nobody is <span class="green">attending</span> this event.</span>
+					<span class="attending" ng-show="current_event.attending_list.length == 1"> is <span class="green">attending</span> this event.</span>
+					<span class="attending" ng-show="current_event.attending_list.length > 10">and <span ng-click="selectEvent(current_event.attending_list, 1)" dropdown="popup" popup=".popup" width="290px">{{current_event.attending_list.length - 10}} others</span> are <span class="green">attending</span> this event</span>
+
+					<!-- MAYBE ATTENDING -->
+					<span class="other_attendees" ng-show="current_event.maybe_list.length > 1 && current_event.maybe_list.length <= 10 && show "> {{current_event.maybe_list.length}} people are <span class="yellow">maybe</span> attending this event.</span>
+					<span class="other_attendees" ng-show="current_event.maybe_list.length == 0 && show"> nobody is <span class="yellow">maybe</span> attending this event.</span>
+					<span class="other_attendees" ng-show="current_event.maybe_list.length == 1 && show"> 1 person is <span class="yellow">maybe</span> attending this event.</span>
+					<span class="other_attendees" ng-show="current_event.maybe_list.length > 10 && show"> {{current_event.maybe_list.length}} people are <span class="yellow">maybe</span> attending this event</span>
+					
+					<!-- NOT ATTENDING -->
+					<span class="other_attendees" ng-show="current_event.not_attending_list.length == 0 && show">nobody is <span class="red">not attending</span> this event.</span>
+					<span class="other_attendees" ng-show="current_event.not_attending_list.length == 1 && show"> 1 person is <span class="red">not attending</span> this event.</span>
+					<span class="other_attendees" ng-show="current_event.not_attending_list.length > 1 && show"> {{current_event.not_attending.length}} people are <span class="red">not attending</span> this event</span>
+					
+					<!-- INVITED -->
+					<span class="other_attendees" ng-show="current_event.invited_list.length == 0 && show">nobody is invited to this event.</span>
+					<span class="other_attendees" ng-show="current_event.invited_list.length == 1 && show"> 1 person is invited to this event.</span>
+					<span class="other_attendees" ng-show="current_event.invited_list.length > 1 && show"> {{current_event.invited_list.length}} people are invited to this event</span>
+
+					<span ng-click="show=true" ng-show="!show" id="show_more">more ...</span>
+					<span ng-click="show=false" ng-show="show" id="show_more">less ...</span>
+				</div>
+			</div>
+			<div id="event-details" class="detail-container">
+				<div>
+					<div class="detail" ng-click="selectEvent(current_event, 0)" dropdown="popup" popup=".popup" width="83%"><span ng-class="{'green_comment' : current_event.comments.total_comments, 'comments-icon': !current_event.comments.total_comments}" class="icon-detail"></span><span>{{current_event.comments.total_comments}} COMMENTS</span></div>
+					<div class="detail">
+						<span ng-click="selectEvent(current_event, 1); likeEvent()" ng-class="{'red_like' : current_event.liked, 'like-icon': !current_event.liked}" class="icon-detail"></span>
+						<span ng-click="selectEvent(current_event.likes.user_likes, 1)" dropdown="popup" popup=".popup" width="290px" >{{current_event.likes.total_likes}} LIKES</span>
+					</div>
+					<div class="detail" ng-click="selectEvent(current_event, 2)" dropdown="popup" popup=".popup" width="90px"><span class="icon-detail share-icon" src="images/share.png"></span><span> SHARE</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="pagination-wrapper" class="tiles">
+		<div id="pagination">
+			<div class="grow" id="previous" ng-show="previous_page">
+				<div class="pagination-arrow"></div>
+				<a class="grow" ng-href="#/events/{{previous_page}}">previous</a>
+			</div>
+			<div class="grow" id="next" ng-show="next_page != -1 && next_page != undefined">
+				<div class="pagination-arrow"></div>
+				<a ng-href="#/events/{{next_page}}">next</a>
+			</div>
+		</div>
+	</div>
+			      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+		<div id="round-close" ng-click="closeDrop()" class="grow">
+			X
+		</div>
+		<div id="comments-popup" ng-hide="popup != 0">
+			<div id="comments-wrapper">
+				<div class="tiles-border">
+				<div class="event-header">
+					<div class="round-pict tiles-pict" back-img="{{selectedData.user.picture_url_thumb}}" alt=""></div>
+					<div id="event-name-details">
+						<div class="tiles-title event-title">{{selectedData.entry.name}}</div>
+						<div class="event-time-pub">{{selectedData.entry.created_at | date:1:0}} <div> by <span>{{selectedData.user.name}}</span></div></div>
+					</div>
+				</div>
+				<div class="event-time-loc">
+					<div><div class="calendar-icon"></div><div class="event-time">{{selectedData.entry.event_date | date:0:1}}</div></div>
+					<div><div class="geoloc-icon"></div><div class="event-loc">
+					{{selectedData.entry.location_name}}</div><a class="arrow-icon" href=""></a></div>
+				</div>
+				<div class="event-short-descr">
+					{{selectedData.entry.description}}
+					<a>{{selectedData.link}}</a>
+				</div>
+					<div id="post-comments">
+						<div id="comment-input-container" class="comments-container">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{user.first_name}} {{user.last_name}}</div>
+								</div>
+							</div>
+							<form ng-submit="commentEvent()">
+								<div id="text-container">
+									<textarea rows="4" ng-model="comment" placeholder="say something..." name="comment"/>
+								</div>
+								<input type="submit" value="ok">
+							</form>
+						</div>
+						<div class="comments-container" ng-repeat="comment in selectedData.comments.user_comments">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{comment.from_name}}</div>
+								</div>
+							</div>
+							<span class="comment">{{comment.comment}}</span>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-hide="popup != 1" id="likes-popup">
+			<div id="like-wrapper">
+				<div id="likes">
+					<div class="comments-container" ng-repeat="like in selectedData">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{like.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{like.from_name}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-hide="popup != 2" id="share-popup">
+			<div id="share-wrapper">
+				<div id="popup-title">
+					Share on your social network
+				</div>
+				<div id="social-logos">
+					<div id="twitter-logo"></div>
+					<div id="facebook-logo"></div>
+					<div id="google-logo"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

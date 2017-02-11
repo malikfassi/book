@@ -1,0 +1,172 @@
+<div id="photos" ng-controller="photosController">
+<div id="pagination-wrapper" class="tiles">
+
+		<div ng-click="getStory()" ng-show="story == 'all'" id="top-story" class="grow">
+			TOP STORIES
+		</div>
+		<div ng-click="getStory()" ng-show="story == 'top'" id="top-story" class="grow">
+			ALL STORIES
+		</div>
+
+
+		<div id="pagination">
+			<div class="grow" id="previous" ng-cloak ng-show="previous_page">
+				<div class="pagination-arrow"></div>
+				<a class="grow" ng-click="goToPage(previous_page)">previous</a>
+			</div>
+			<div class="grow" id="next" ng-cloak ng-show="next_page != -1 && next_page != undefined">
+				<div class="pagination-arrow"></div>
+				<a ng-click="goToPage(next_page)">next</a>
+			</div>
+		</div>
+		<div style="clear: both"></div>
+	</div>
+	<div id="photo-wrapper"> 
+		<div id="search-photos"><span class="magn-glass"></span><div id="input-wrapper"><input placeholder="Search" type="text"/></div></div>
+
+		<div id="group-photos" columns-handler>
+			<div class="column-left">
+				<div ng-repeat="img in imgs1">
+					<div ng-if="img.type == 'Photo'">
+						<div class="photo-detail" display-if-img="{{img.entry.pictures.original}}">
+							<div class="inline-block">
+								<div ng-click="selectPicture(img); likePhoto()"  ng-class="{'shadow-red-like' : img.liked, 'white-likes': !img.liked}"></div><span ng-click="selectPicture(img, 1);" dropdown="popup" popup=".popup" width="290px">{{img.likes.total_likes}}</span>
+							</div>
+							<div dropdown="popup" popup=".popup" width="80%" ng-click="selectPicture(img, 0)" class="inline-block">
+								<div ng-class="{'shadow_green_comment' : img.comments.total_comments, 'white-comments': !img.comments.total_comments}"></div><span>{{img.comments.total_comments}}</span>
+							</div>
+						</div>
+						<div class="act-photo" back-img-size="{{img.entry.pictures.original}}"></div>
+					</div>
+					<!--
+					<div ng-if="img.type == 'Video'">
+						<video class="act-photo">
+							<source src="{{img.entry.ogg}}" type="video/ogg">
+							<source src="{{img.entry.video}}" type="video/mp4">
+						</video>
+					</div>-->
+				</div>
+			</div>
+
+			<div class="column-center">
+				<div ng-repeat="img in imgs2">
+					<div ng-if="img.type == 'Photo'">
+						<div class="photo-detail" display-if-img="{{img.entry.pictures.original}}">
+							<div class="inline-block">
+								<div ng-click="selectPicture(img); likePhoto()"  ng-class="{'red_like' : img.liked, 'white-likes': !img.liked}"></div><span ng-click="selectPicture(img, 1);" dropdown="popup" popup=".popup" width="290px">{{img.likes.total_likes}}</span>
+							</div>
+							<div dropdown="popup" popup=".popup" width="80%" ng-click="selectPicture(img, 0)" class="inline-block">
+								<div ng-class="{'green_comment' : img.comments.total_comments, 'white-comments': !img.comments.total_comments}"></div><span>{{img.comments.total_comments}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="act-photo" back-img-size="{{img.entry.pictures.original}}"></div>
+									<!--
+					<div ng-if="img.type == 'Video'">
+						<video class="act-photo">
+							<source src="{{img.entry.ogg}}" type="video/ogg">
+							<source src="{{img.entry.video}}" type="video/mp4">
+						</video>
+					</div>-->
+				</div> 
+			</div>
+
+			<div class="column-right">
+				<div ng-repeat="img in imgs3">
+					<div ng-if="img.type == 'Photo'">
+						<div class="photo-detail" display-if-img="{{img.entry.pictures.original}}">
+							<div class="inline-block">
+								<div ng-click="selectPicture(img); likePhoto()"  ng-class="{'red_like' : img.liked, 'white-likes': !img.liked}"></div><span ng-click="selectPicture(img, 1);" dropdown="popup" popup=".popup" width="290px">{{img.likes.total_likes}}</span>
+							</div>
+							<div dropdown="popup" popup=".popup" width="80%" ng-click="selectPicture(img, 0)" class="inline-block">
+								<div ng-class="{'green_comment' : img.comments.total_comments, 'white-comments': !img.comments.total_comments}"></div><span>{{img.comments.total_comments}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="act-photo" back-img-size="{{img.entry.pictures.original}}"></div>
+									<!--
+					<div ng-if="img.type == 'Video'">
+						<video class="act-photo">
+							<source src="{{img.entry.ogg}}" type="video/ogg">
+							<source src="{{img.entry.video}}" type="video/mp4">
+						</video>
+					</div>-->
+				</div> 
+			</div>
+		</div>
+	</div>
+			      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+		<div id="round-close" ng-click="closeDrop()" class="grow">
+			X
+		</div>
+		<div ng-hide="popup != 0">
+			<div id="wrapper-photo-popup" max-height>
+				<div id="photo-container">
+					<div>
+						<img id="popup-photo" img-src-center="{{selectedPicture.entry.pictures.original}}"/>
+					</div>
+					<span id="go_down" scroll-to="#photo-comments-container"><span></span></span>
+				</div>
+				<div id="photo-comments-container">
+					<div>
+						<div class="comments-container">
+							<div class="comments-details">
+								<span ng-show="selectedPicture.entry.posttitle" class="photo-title">{{selectedPicture.entry.posttitle}}</span>
+								<div class="photo-by">
+									<div> by {{selectedPicture.user.name}}</div>
+								</div>
+							</div>
+							<div ng-show="selectedPicture.entry.post" class="photo-description">{{selectedPicture.entry.post}}</div>
+							<a class="article-link" ng-show="selectedPicture.entry.postlink" href="{{selectedPicture.entry.postlink}}">Original post</a>
+							<div class="comments-details">
+								<div id="comments-details-container">
+									<div class="big-like-icon"></div><span>{{selectedPicture.likes.total_likes}}</span>
+									<div class="big-comments-icon"></div><span>{{selectedPicture.comments.total_comments}}</span>
+								</div>
+							</div>
+						</div>
+						<div id="comment-input-container" class="comments-container">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}"></div>
+								<div id="comment-name">
+									<div>{{user.first_name}} {{user.last_name}}</div>
+								</div>
+							</div>
+							<form ng-submit="commentPhoto()">
+								<div id="text-container">
+									<textarea ng-model="comment" rows="4" placeholder="say something..." name="comment"/>
+								</div>
+								<input type="submit" value="ok">
+							</form>
+						</div>
+						<div class="comments-container" ng-repeat="comment in selectedPicture.comments.user_comments">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{comment.from_name}}</div>
+								</div>
+							</div>
+							<span class="comment">{{comment.comment}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-hide="popup != 1" id="likes-popup">
+			<div id="like-wrapper">
+				<div id="likes">
+					<div class="comments-container" ng-repeat="like in selectedPicture.likes.user_likes">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{like.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{like.from_name}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div id="login-tile" class="tiles-border tiles" data-ng-controller="LoginController">
+
+	<img id="logo" src="images/logo.png" alt="logo ITA Access" data-ng-click="credentials={email:'headquarters@illinoistech.org',password:'san@diego13'}" />
+
+	<div class="login-errors" id="error">
+		<span class="login-error" data-ng-repeat="error in errors">{{error}}<br/></span>
+	</div>
+	
+	<form data-ng-submit="login()" name="login-form" data-novalidate>
+
+		<input class="login-input" data-ng-model="credentials.email" type="text" name="email" placeholder="Email Adress"/ data-required>
+		<div class="password-wrap">
+			<input class="login-input" data-ng-model="credentials.password" name="password" type="password" placeholder="Password" data-required/>
+			<a id="forgot">Forgot?</a>
+		</div>
+
+		<div class="custom-checkbox" id="staylogged">
+			<input type="checkbox" id="checkstaylogged" data-ng-model="credentials.staylogged" value="checkstaylogged">
+			<label for="checkstaylogged">Stay Logged In</label>
+		</div>
+
+		<div id="checklogin">
+			<div id="login-button-wrapper">
+				<input type="submit" class="login-button" value="Submit" data-ng-disabled="bizquid_order.$invalid"/>
+			</div>
+		</div>
+
+	</form>
+
+</div>

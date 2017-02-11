@@ -1,0 +1,36 @@
+<div id="people" ng-controller="peopleController">
+	<div id="people-wrapper">
+		<div id="filters">
+			<div class="filter" ng-click="selectDrop(0)"><span ng-class="filters.attr != '' ? 'filter_active' : ''">Sort By </span><span class="arrow-filter"></span></div>
+			<div class="filter" ng-click="selectDrop(1)"><span ng-class="filters.letter != '' ? 'filter_active' : ''">Alphabet</span><span class="arrow-filter"></span></div>
+			<div class="input-filter-wrapper">
+				<div class="input-filter">
+					<span class="magn-glass"></span>
+					<div id="input-wrapper">
+						<input ng-model="search" type="text" placeholder="Search"/>
+					</div>
+				</div>
+			</div>
+			<div id="sort-drop" ng-class="{'hidden': !filtersTab[1], 'filter_active': filtersTab[1]}">
+				<div class="filter-element" ng-click="chooseAttr('lastname')" ng-class="filters.attr == 'lastname' ? 'filter_active' : ''">Sort by Name</div>
+				<div class="filter-element" ng-click="chooseAttr('company')" ng-class="filters.attr == 'company' ? 'filter_active' : ''">Sort by Company</div>
+				<div class="filter-element" ng-click="chooseAttr('departement')" ng-class="filters.attr == 'departement' ? 'filter_active' : ''">Sort by Group</div>
+			</div>
+			<div id="alphabet-drop" ng-class="{'hidden': !filtersTab[0], 'filter_active': filtersTab[0]}">
+				<div id="alphabet-wrapper">
+					<span class="filter-element" ng-repeat="letter in letters" ng-click="chooseLetter(letter)" ng-class="filters.letter == letter ? 'filter_active' : ''">{{letter}}</span>
+				</div>
+			</div>
+		</div>
+		<div id="all-people">
+			<div ng-repeat="person in people | orderBy: filters.attr | startsWith:filters.letter | startsWith:search" class="person tiles-border">
+				<div class="round-pict" back-img="{{person.picture_url_thumb}}"></div>
+				<div> {{person.firstname}} {{person.lastname}}
+				</div>
+				<div>{{person.company}}</div><div>{{person.departement}}</div>
+			</div>
+		</div>
+	</div>
+				      <div id="mask" class="hidden"></div>
+
+</div>

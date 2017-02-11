@@ -1,0 +1,25 @@
+{
+  "error":false,
+  "data":
+  [
+    {
+      "firstname": "Townsend",
+      "lastname": "Valentine",
+      "picture": "http://api.randomuser.me/portraits/men/4.jpg",
+      "company": "fugiat qui",
+      "departement": "consequat elit voluptate",
+      "job_title": "nisi veniam",
+      "nb_pict": 94,
+      "groups": [
+        {
+          "name": "amet cupidatat ex consequat",
+          "picture": "http://placekitten.com/284/391"
+        },
+        {
+          "name": "id magna",
+          "picture": "http://placekitten.com/299/233"
+        }
+      ]
+    }
+  ]
+}

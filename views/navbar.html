@@ -1,0 +1,215 @@
+<div class="navbar tiles-border">
+	<div class="navbar-container">
+		<div class="navbar-pict">
+			<div class="profile-buttons">
+				<div ng-click="dropdown_active(0)" id="profile-drop" class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" dropdown child="profile" alt=""></div>
+				<div dropdown child="addnew" ng-click="dropdown_active(1)" id="addnew-button"></div>
+				<div ng-hide="!notifications.length" id="notif-spot" class="round-pict">{{notifications.length < 10 ? notifications.length : 10}}</div>
+			</div>
+		</div>
+		<!-- Profile-Dropdown -->
+		<div dropdown parent="profile" class="profile-dropdown tiles-border hidden">
+			<div id="first-arrow" class="arrow-up"></div>
+			<div class="mini-nav-drop tiles-border">
+				<div id="profile-link">
+					<a ng-href="#/profile" close-drop><div id="profile-icon"></div><span>PROFILE</span></a>
+				</div>
+				<div id="logout-link" close-drop>
+					<div id="logout-icon"></div><span ng-click="logout()">LOGOUT</span>
+				</div>
+			</div>
+			<div ng-hide="notifications.length" class="notification-container no-notif">
+				NO NOTIFICATION
+			</div>
+			<div ng-hide="!notifications.length" class="notification-container" ng-repeat="notification in notifications | limitTo:10">
+				<div class="round-pict dropdown-profile-pict" back-img="{{notification.subject_to.picture_url_thumb}}" alt=""></div>
+				<div class="notification">
+					<span class="name-color">{{notification.from_user.name}} </span> {{notification.notif}} <span class="post-color"> {{notification.subject}}</span>
+				</div>
+				<div class="notif-time">{{notification.date}}</div>
+			</div>
+			<div ng-hide="!notifications.length" ng-click =""class="profile-dropdown-footer">CLEAR ALL</div>
+		</div>
+		<!-- !Profile-Dropdown -->
+
+		<!-- ADDNEW DROPDOWN -->
+
+		<div dropdown parent="addnew" class="addnew-dropdown profile-dropdown tiles-border hidden">
+			<div id="first-arrow" class="arrow-up"></div>
+			<div class="addnew-container">
+				<a ng-href="#/add-post" close-drop>
+					<div id="post-icon" class="addnew-icon" ></div><span class="addnew-name grow">Add new post</span>
+				</a>
+			</div>
+			<div class="addnew-container">
+				<a ng-href="#/add-poll" close-drop>
+					<div id="poll-icon" class="addnew-icon"></div><span class="addnew-name grow">Add new poll</span>
+				</a>
+			</div>
+			<div class="addnew-container">
+				<a ng-href="#/add-event" close-drop>
+					<div id="event-icon" class="addnew-icon"></div><span class="addnew-name grow">Add new event</span>
+				</a>
+			</div>
+		</div>
+
+		<ul class="navbar-elem">
+			<li class="grow" ng-click="tab_active(0)"><a ng-class="{'active-navbar':tab[0]}" ng-href="#/feed">FEED</a></li>
+			<li ng-click="tab_active(1)" class="grow"><a ng-class="{'active-navbar':tab[1]}" ng-href="#/events">EVENTS</a></li>
+			<li ng-click="tab_active(2)" class="grow"><a ng-class="{'active-navbar':tab[2]}" ng-href="#/photos">PHOTOS</a></li>
+			<li ng-click="tab_active(3)" class="grow"><a ng-class="{'active-navbar':tab[3]}" ng-href="#/people">PEOPLE</a></li>
+			<li ng-click="dropdown_active(2);" dropdown child="settings" class="grow" id="settings"><a>SETTINGS</a></li>
+		</ul>
+
+		<!-- SETTINGS DROPDOWN -->
+
+		<div dropdown parent="settings" class="hidden" id="settings-dropdown" class="tiles-border">
+			<div id="settings-arrow" class="arrow-up"></div>
+			<span>Contact Administrator</span>
+		</div>
+
+		<div class="second-img-navbar">
+			<div dropdown child="group" ng-click="dropdown_active(3)" ng-hide="mainGroup" class="all-groups-icon round-pict tiles-pict"></div>
+			<span ng-hide="mainGroup">All my groups</span>
+			<div dropdown child="group" ng-hide="!mainGroup" ng-click="dropdown_active(3)" class="round-pict tiles-pict" back-img="{{mainGroup.picture_url_thumb}}"></div>
+			<span ng-hide="!mainGroup">{{mainGroup.name}}</span>
+		</div>
+
+
+		<!-- Group-Dropdown-->
+		<div dropdown parent="group" class="second-drop-navbar tiles-border hidden">
+			<div id="second-arrow" class="arrow-up"></div>
+			<div id="search-bar">
+				<div class="magn-glass"></div>
+				<div id="input-search-wrapper">
+					<input class="searchbar" type="text" placeholder="Search Group"/>
+				</div>
+				<a ng-href="#/add-group" close-drop><div class="grow" id="plus-sign"></div></a>
+			</div>
+			<div id="group-nav">
+				<div ng-click="selectMainGroupList()" ng-class="{'group-nav-active': groupTab}">All Groups</div>
+				<div ng-click="selectMainGroupList()" ng-class="{'group-nav-active': !groupTab}">My Groups</div>
+			</div>
+			<div class="groups">
+				<div ng-hide="groupTab" class="group-elem" ng-click="selectMainGroup(false)">
+					<div class="round-pict tiles-pict group-image all-groups-icon" close-drop></div>
+					<span class="group-name" close-drop>All my groups</span>
+				</div>
+				<div class="group-elem" ng-repeat="group in selectedGroups">
+					<div class="round-pict tiles-pict group-image" ng-click="selectMainGroup(group)" back-img="{{group.picture_url_thumb}}" close-drop></div>
+					<span class="group-name" ng-click="selectMainGroup(group)" close-drop>{{group.name}} - {{group.privacy}}</span>
+					<div ng-if="group.privacy === 'Private'" ng-class="{'private-icon': mainGroup.id != group.id, 'private-icon-green': mainGroup.id == group.id}" ng-click="selectMainGroup(group)" class="icon" close-drop></div>
+					<div ng-if="group.privacy === 'Restricted'" ng-class="{'protected-icon': mainGroup.id != group.id, 'protected-icon-green': mainGroup.id == group.id}" ng-click="selectMainGroup(group)" class="icon" close-drop></div>
+					<div ng-if="group.privacy === 'Open'" ng-click="selectMainGroup(group)" ng-class="{'open-icon': mainGroup.id != group.id, 'open-icon-green': mainGroup.id == group.id}" class="open-icon icon" close-drop></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<header dropdown parent="menu-left" id="menu-left">
+	<ul>
+		<div id="new">
+			<li class="title-menu">
+				CREATE
+			</li>
+			<li class="grow"><a ng-href="#/add-event"><div id="event-icon" class="addnew-icon"></div><span class="addnew-name nav-click">NEW EVENT</span></a></li>
+			<li class="grow"><a ng-href="#/add-poll"><div id="poll-icon" class="addnew-icon"></div><span class="addnew-name nav-click">NEW POLL</span></a></li>
+			<li class="grow"><a ng-href="#/add-post"><div id="post-icon" class="addnew-icon"></div><span class="addnew-name nav-click">NEW POST</span></a></li>
+		</div>
+		<div id="navigation">
+			<li class="title-menu">
+				BROWSE
+			</li>
+			<li class="grow"><a ng-click="tab_active(0)" ng-class="{'active-navbar':tab[0]}" ng-href="#/feed" class="nav-click">FEED</a></li>
+			<li class="grow"><a ng-click="tab_active(1)" ng-class="{'active-navbar':tab[1]}" ng-href="#/events" class="nav-click">EVENTS</a></li>
+			<li class="grow"><a ng-click="tab_active(2)" ng-class="{'active-navbar':tab[2]}" ng-href="#/photos" class="nav-click">PHOTOS</a></li>
+			<li class="grow"><a ng-click="tab_active(3)" ng-class="{'active-navbar':tab[3]}" ng-href="#/people" class="nav-click">PEOPLE</a></li>
+			<li class="grow spec">
+				<div id="profile-icon"></div>
+				<a class="nav-click" ng-href="#/profile">PROFILE</a>
+			</li>
+			<li class="grow spec">
+				<div id="logout-icon"></div>
+				<a class="nav-click" ng-click="logout()">LOGOUT</a>
+			</li>
+			<li id="settings"><a href="" class="grow">SETTINGS</a></li>
+		</div>
+		<div id="resp-groups-wrapper">
+			<li class="title-menu">
+				CHOOSE
+			</li>
+			<li id="resp-groups">
+				<div id="search-bar">
+					<div class="magn-glass"></div>
+					<div id="input-search-wrapper">
+						<input type="text" class="searchbar" placeholder="Search Group"/>
+					</div>
+				</div>
+				<div id="group-nav">
+					<div ng-click="selectMainGroupList()" ng-class="{'group-nav-active': groupTab}">All Groups</div>
+					<div ng-click="selectMainGroupList()" ng-class="{'group-nav-active': !groupTab}">My Groups</div>
+				</div>
+				<div id="all-groups">
+		
+
+					<div ng-hide="groupTab" class="filtered-group" ng-click="selectMainGroup(false)">
+						<div class="round-pict tiles-pict group-image all-groups-icon" close-drop></div>
+						<span class="group-name" close-drop>All my groups</span>
+					</div>
+					<div class="filtered-group" ng-repeat="group in selectedGroups">
+						<div class="round-pict tiles-pict group-image" ng-click="selectMainGroup(group)" back-img="{{group.picture_url_thumb}}" close-drop></div>
+						<span class="group-name" ng-click="selectMainGroup(group)" close-drop>{{group.name}} - {{group.privacy}}</span>
+						<div ng-if="group.privacy === 'Private'" ng-class="{'private-icon': mainGroup.id != group.id, 'private-icon-green': mainGroup.id == group.id}" ng-click="selectMainGroup(group)" class="icon" close-drop></div>
+						<div ng-if="group.privacy === 'Restricted'" ng-class="{'protected-icon': mainGroup.id != group.id, 'protected-icon-green': mainGroup.id == group.id}" ng-click="selectMainGroup(group)" class="icon" close-drop></div>
+						<div ng-if="group.privacy === 'Open'" ng-click="selectMainGroup(group)" ng-class="{'open-icon': mainGroup.id != group.id, 'open-icon-green': mainGroup.id == group.id}" class="open-icon icon" close-drop></div>
+					</div>
+					<div class="filtered-group">
+						<a ng-href="#/add-group" class="nav-click"><div id="add-group-resp"><div></div><span>Add group</span></div></a>
+					</div>
+				</div>
+			</li>
+		</div>
+	</ul>
+</header> <!-- hidden-menu -->
+
+<div id="resp-nav-wrap">
+	<div id="resp-navbar-left" nav-bar="resp-navbar-left" dropdown custom-menu="menu-left" wrapper="page-wrap" position="left"> <!-- visible responsive navbar-->
+		<span>
+			<div class="three-bars">
+				<div class="icon-navbar"></div><div class="icon-navbar"></div><div class="icon-navbar"></div>
+			</div>
+		</span>
+	</div>
+
+	<div ng-show="displayClose" id="resp-round-close" ng-click="closeDrop()" class="grow">
+		<div>
+			X
+		</div>
+	</div>
+
+
+
+
+	<div id="resp-navbar-right" nav-bar="resp-navbar-right" dropdown custom-menu="menu-right" wrapper="page-wrap" position="right"><!-- visible responsive navbar-->
+		<span>
+			<div ng-hide="!notifications.length" id="notif-spot" class="round-pict">{{notifications.length}}</div>
+		</span>
+	</div>
+</div>
+
+<header dropdown parent="menu-right" id="menu-right">
+	<div id="menu-right-container" no-scroll="menu-right">
+		<div ng-hide="notifications.length" class="notification-container no-notif">
+			NO NOTIFICATION
+		</div>
+		<div ng-hide="!notifications.length" class="notification-container" ng-repeat="notification in notifications">
+			<div class="round-pict dropdown-profile-pict" back-img="{{notification.from_user.picture_url_thumb}}" alt=""></div>
+			<div class="notification">
+				<span class="name-color">{{notification.from_user.name}} </span> {{notification.notif}} <span class="post-color"> {{notification.subject}}</span>
+			</div>
+			<div class="notif-time">{{notification.date}}</div>
+		</div>
+		<div ng-hide="!notifications.length" ng-click =""class="profile-dropdown-footer">CLEAR ALL</div>
+	</div>
+</header>

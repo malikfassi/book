@@ -1,0 +1,203 @@
+<div id="profile-page" ng-controller="groupController">
+	<div id="profilewrapper">
+		<div id="profile" ng-show="!edit" class="tiles tiles-border">
+			<div id="addnew-header">
+				<div class="round-pict tiles-pict" back-img="{{group.group_info.picture_url_thumb}}"></div>
+				<div id="profile-name">{{group.group_info.name}}</div>
+			</div>
+			<div id="description" class="profile-description">
+				{{group.group_info.short_info}}
+			</div>
+			<div id="members">
+				<span>Members</span>
+				<div id="members-pict">
+					<div id="member" ng-repeat="group in group.active_members">
+						<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}"></div>
+					</div>
+				</div>
+			</div>
+			<div id="members">
+				<span>Administrator</span>
+				<div id="members-pict">
+					<div id="member">
+						<div class="round-pict tiles-pict" back-img="{{group.admin.picture_url_thumb}}"></div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="group.group_info.admin_id === user.id" id="addgroup-confirm">
+				<span><a ng-click="editGroup()">Edit group</a></span>
+				<span id="leaveGroup" ng-click="leaveGroup()" ng-if="group.user_group_status == 1">
+					<a>LEAVE GROUP</a>
+				</span>
+				<span id="joinGroup" ng-click="joinGroup()" ng-if="group.user_group_status == 2">
+					<a>JOIN GROUP</a>
+				</span>
+			</div>
+		</div>
+		<div id="add-group" ng-show="edit"  ng-init="init('update', group)" ng-controller="addGroupController">
+			<div id="add-group-wrapper" class="tiles tiles-border">
+				<form ng-submit="addGroup()">
+					<div id="addnew-header">
+						<input id="group-name" ng-model="group_name" placeholder="Enter Group Name"/>
+						<div id="icons">
+							<div id="camera-icon" click-on="#inputPict" class="round-pict grow"></div>
+							<input input-loader id="inputPict" type="file" accept="image/*"/>
+						</div>
+						<span><a href="#">Click here to upload an image</a></span>
+					</div>
+					<div id="description">
+						<textarea ng-model="description" placeholder="Enter a description"></textarea> 
+					</div>
+					<div id="privacy-title"> Privacy </div>
+					<div id="is-private">
+						<div ng-class="{'open-icon-green': privacy == 0}" class="open-icon" ng-click="privacy = 0"></div>
+						<span ng-class="{'privacy-active': privacy == 0}" class="privacy" ng-click="privacy = 0">Open</span>
+						<div ng-class="{'private-icon-green': privacy == 1}" class="private-icon" ng-click="privacy = 1"></div>
+						<span ng-class="{'privacy-active': privacy == 1}" class="privacy" ng-click="privacy = 1">Private</span>
+						<div ng-class="{'protected-icon-green': privacy == 2}" class="protected-icon" ng-click="privacy = 2"></div>
+						<span ng-class="{'privacy-active': privacy == 2}" class="privacy" ng-click="privacy = 2">Restricted</span>
+					</div>
+					<div ng-hide="!loadedData" id="pictures">
+						<span>Uploaded file</span>
+						<div ng-if="!loadedData.type" class="round-pict pict" back-img="{{loadedData}}"></div>
+						<div ng-if="loadedData.type == 'video/mp4'" id="big-video-icon" class="round-pict grow"></div>
+					</div>
+					<div id="addgroup-confirm">
+						<div class="addgroup-buttons" ng-click="edit = false">Cancel</div>
+						<input class="addgroup-buttons" value="Save" type="submit"/>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+		<div id="comments-popup" ng-hide="popup != 0">
+			<div id="comments-wrapper">
+				<div class="tiles-border">
+					<div>
+						<div>
+							<div class="round-pict tiles-pict" back-img="{{selectedPost.user.picture_url_thumb}}" alt=""></div>
+							<div class="title-container tiles-title">{{selectedPost.user.name}}</div>
+							<span class="title-time title-container">{{selectedPost.date}}</span>
+						</div>
+						<div class="article-container">
+							<div class="article-title">{{selectedPost.entry.posttitle}}</div>
+							<div class="article-content">
+								{{selectedPost.entry.post}}
+							</div>
+							<a class="article-link" href="http://ita.cx/1nlxBfN">{{selectedPost.entry.postlink}}</a>
+						</div>
+					</div>
+				</div>
+				<div id="post-comments">
+					<div id="comment-input-container" class="comments-container">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{user.first_name}} {{user.last_name}}</div>
+							</div>
+						</div>
+						<form ng-submit="commentPost()">
+							<div id="text-container">
+								<textarea ng-model="comment"rows="4" placeholder="say something..." name="comment"/>
+							</div>
+							<input type="submit" value="ok">
+						</form>
+					</div>
+					<div class="comments-container" ng-repeat="comment in selectedPost.comments.user_comments">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{comment.from_name}}</div>
+							</div>
+						</div>
+						<span class="comment">{{comment.comment}}</span>
+					</div>
+				</div>
+			</div>
+			<!-- WWTTTTFFF ???
+			<div id="close-button">
+				<input type="button" ng-click="closeDrop()"value="close"/>
+			</div>-->
+		</div>
+		<div ng-hide="popup != 1" id="likes-popup">
+			<div id="like-wrapper">
+				<div id="likes">
+					<div class="comments-container" ng-repeat="like in selectedPost.likes.user_likes">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{like.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{like.from_name}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="close-button">
+					<input type="button" ng-click="closeDrop()"value="close"/>
+				</div>
+			</div>
+		</div>
+		<div ng-hide="popup != 2" id="share-popup">
+			<div id="share-wrapper">
+				<div id="popup-title">
+					Share on your social network
+				</div>
+				<div id="social-logos">
+					<div id="twitter-logo"></div>
+					<div id="facebook-logo"></div>
+					<div id="google-logo"></div>
+				</div>
+				<div id="ok-button">
+					<input type="button" ng-click="closeDrop()" value="ok"/>
+				</div>
+			</div>
+		</div>
+		<div id="comments-popup" ng-hide="popup != 3">
+			<div id="comments-wrapper">
+				<div class="tiles-border">
+				<div class="event-header">
+					<div class="round-pict tiles-pict" back-img="{{selectedPost.user.picture_url_thumb}}" alt=""></div>
+					<div id="event-name-details">
+						<div class="tiles-title event-title">{{selectedPost.entry.name}}</div>
+						<div class="event-time-pub">{{selectedPost.entry.created_at | date:1:0}} <div> by <span>{{selectedPost.user.name}}</span></div></div>
+					</div>
+				</div>
+				<div class="event-time-loc">
+					<div><div class="calendar-icon"></div><div class="event-time">{{selectedPost.entry.event_date | date:0:1}}</div></div>
+					<div><div class="geoloc-icon"></div><div class="event-loc">
+					{{selectedPost.entry.location_name}}</div><a class="arrow-icon" href=""></a></div>
+				</div>
+				<div class="event-short-descr">
+					{{selectedPost.entry.description}}
+					<a>{{selectedPost.link}}</a>
+				</div>
+					<div id="post-comments">
+						<div id="comment-input-container" class="comments-container">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{user.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{user.first_name}} {{user.last_name}}</div>
+								</div>
+							</div>
+							<form ng-submit="commentEvent()">
+								<div id="text-container">
+									<textarea rows="4" ng-model="comment" placeholder="say something..." name="comment"/>
+								</div>
+								<input type="submit" value="ok">
+							</form>
+						</div>
+						<div class="comments-container" ng-repeat="comment in selectedPost.comments.user_comments">
+							<div class="comments-details">
+								<div class="round-pict tiles-pict" back-img="{{comment.picture_url_thumb}}" alt=""></div>
+								<div id="comment-name">
+									<div>{{comment.from_name}}</div>
+								</div>
+								<span class="comment">{{comment.comment}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

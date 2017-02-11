@@ -1,0 +1,112 @@
+<div id="add-event" ng-controller="addEventController">
+	<div id="add-event-wrapper" class="tiles tiles-border">
+		<form ng-submit="addEvent()">
+			<div id="addnew-header">
+				<div id="event-icon-title"></div>
+				<input id="post-title" ng-model="event_title" placeholder="Enter Event Title"/>
+				<div id="icons">
+					<div id="camera-icon" click-on="#inputPict" class="round-pict grow"></div>
+					<input input-loader id="inputPict" type="file" accept="image/*"/>
+				</div>
+				<span><a>Click here to upload an image</a></span>
+			</div>
+			<div id="description">
+				<textarea ng-model="description" id="post-desc" placeholder="Enter a description"></textarea>
+				<span><div id="geo-icon"></div><input placeholder="Enter event location" type="text" ng-model="location_name"/></span>
+			</div>
+			<div id="date">
+				<span>Enter date</span>
+				<div>
+					<span class="grow">
+						<div ng-click="nextMonth()"></div>
+						{{months[selectedDate.month_id]}}
+						<div ng-click="lastMonth()"></div>
+					</span>
+					<span class="grow">
+						<div ng-click="nextDay()"></div>
+						{{selectedDate.day}}
+						<div ng-click="lastDay()"></div>
+					</span>
+					<span class="grow">
+						<div ng-click="nextYear()"></div>
+						{{selectedDate.year}}
+						<div ng-click="lastYear()"></div>
+					</span>
+					<div>
+						<span>at</span>
+						<span class="grow">
+							<div ng-click="nextHour()"></div>
+							{{sched.hour}}
+							<div ng-click="lastHour()"></div>
+						</span>
+						<span>:</span>
+						<span class="grow">
+							<div ng-click="nextMin()"></div>
+							{{sched.minutes}}
+							<div ng-click="lastMin()"></div>
+						</span>
+						<span class="grow">
+							<div ng-click="nextAmpm()"></div>
+							{{ampm[selectedDate.ampm]}}
+							<div ng-click="nextAmpm()"></div>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div id="members">
+				<span>Add groups</span>
+				<div id="members-pict">
+					<div id="member" ng-repeat="group in allGroups" ng-click="selectGroup(group)" ng-if="group.checked">
+						<div class="round-pict tiles-pict hoverblur" back-img="{{group.picture_url_thumb}}" alt=""></div>
+						<div class="cross">✖</div>
+					</div>
+					<div dropdown="popup" ng-click="popup=1" popup=".popup" width="290px" class="round-pict grow plus"></div>
+				</div>
+			</div>
+			<div ng-hide="!loadedData" id="pictures">
+				<span>Uploaded file</span>
+				<div ng-if="!loadedData.type" class="round-pict pict" back-img="{{loadedData}}"></div>
+				<div ng-if="loadedData.type == 'video/mp4'" id="big-video-icon" class="round-pict grow"></div>
+			</div>
+			<div id="addgroup-confirm">
+				<div class="addgroup-buttons"><a ng-href="/">Cancel</a></div>
+				<input class="addgroup-buttons" value="Create Event" type="submit"/>
+			</div>
+		</form>
+	</div>
+					      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup">
+	<div id="wrapper-popup">
+		<div id="round-close" ng-click="closeDrop()" class="grow">
+			X
+		</div>
+		<div ng-hide="popup != 0" id="photo-add">
+			<div id="photo-container">
+				<div id="remove-button" display-when-hover="#img" class="grow" ng-click="removePict(selectedPicture)">✖</div>
+				<img id="img" img-src="{{selectedPicture.link}}"/>
+			</div>
+		</div>
+		<div ng-hide="popup != 1" id="add-group-popup">
+			<div id="add-group-popup-wrapper">
+				<div id="allgroups">
+					<div class="comments-container" ng-repeat="group in allGroups">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{group.name}}</div>
+							</div>
+							<div id="checkgroups">
+								<input ng-click="selectGroup(group)" type="checkbox"/>
+								<div ng-click="selectGroup(group)" ng-show="group.checked"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+			<div id="error">
+		</div>
+	</div>
+</div>

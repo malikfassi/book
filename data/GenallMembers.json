@@ -1,0 +1,8 @@
+[
+       '{{repeat(200)}}',
+          {
+           "firstname":"{{firstName()}}",
+        "lastname":"{{surname()}}",
+        "picture_url_thumb" : "http://api.randomuser.me/portraits/{{random('men','women')}}/{{integer()}}.jpg"
+          }
+]

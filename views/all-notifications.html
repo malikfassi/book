@@ -1,0 +1,13 @@
+<div  id="allNotification" ng-controller="allNotificationsController">
+	<div class="tiles tiles-border">
+		<div class="tiles-content-container" ng-repeat="notification in notifications">
+			<div class="article-container">
+				<div class="round-pict tiles-pict" back-img="{{notification.picture}}" alt=""></div>
+				<div>
+					<div class="allnotif"><span class="name-color">{{notification.from}}</span> {{notification.notification}} <span class="post-color">{{notification.subject}}</span> :</div>
+					<div>{{notification.notification}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

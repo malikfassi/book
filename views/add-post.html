@@ -1,0 +1,75 @@
+<div id="add-post">
+	<div id="add-post-wrapper" class="tiles tiles-border">
+		<form ng-submit="add_post()">
+			<div id="addnew-header">
+				<div id="post-icon-title"></div>
+				<input id="post-title" ng-model="post_title" placeholder="Enter Post Title"/>
+				
+				<div id="icons">
+					<div id="camera-icon" click-on="#inputPict" class="round-pict grow"></div>
+					<div id="little-video-icon" click-on="#inputVid" class="round-pict grow"></div>
+					<input input-loader id="inputPict" type="file" accept="image/*"/>
+					<input input-loader id="inputVid" type="file" accept="video/*"/>
+				</div>
+				<span><a href="#">Click here to upload an image/video</a></span>
+			</div>
+			<div id="description">
+				<textarea ng-model="post_desc" id="post-desc" placeholder="Enter a description"></textarea> 
+				<span><input placeholder="+ Add link" type="text" ng-model="post_link"/></span></div>
+			<div id="members">
+				<span>Add groups</span>
+				<div id="members-pict">
+					<div id="member" ng-repeat="group in allGroups" ng-click="selectGroup(group)" ng-if="group.checked">
+						<div class="round-pict tiles-pict hoverblur" back-img="{{group.picture_url_thumb}}"></div>
+						<div class="cross">✖</div>
+					</div>
+					<div dropdown="popup" ng-click="popup=1" popup=".popup" width="290px" class="round-pict grow plus"></div>
+				</div>
+			</div>
+			<div ng-hide="!loadedData" id="pictures">
+				<span>Uploaded file</span>
+				<div ng-if="!loadedData.type" class="round-pict pict" back-img="{{loadedData}}"></div>
+				<div ng-if="loadedData.type == 'video/mp4'" id="big-video-icon" class="round-pict"></div>
+			</div>
+			<div id="addgroup-confirm">
+				<div class="addgroup-buttons"><a ng-href="/">Cancel</a></div>
+				<input class="addgroup-buttons" value="Post" type="submit"/>
+			</div>
+		</form>
+	</div>
+					      <div id="mask" class="hidden"></div>
+
+	<div id="popup" dropdown="popup" parent="popup" class="popup tiles">
+		<div id="round-close" ng-click="closeDrop()" class="grow">
+			X
+		</div>
+		<div ng-hide="popup != 0" id="photo-add">
+			<div id="photo-container">
+				<div id="remove-button" display-when-hover="
+				#img" class="grow" ng-click="removePict(selectedPicture)">✖</div>
+				<img id="img" img-src="{{selectedPicture.link}}"/>
+			</div>
+		</div>
+		<div ng-hide="popup != 1" id="add-group-popup">
+			<div id="add-group-popup-wrapper">
+				<div id="allgroups">
+					<div class="comments-container" ng-repeat="group in allGroups">
+						<div class="comments-details">
+							<div class="round-pict tiles-pict" back-img="{{group.picture_url_thumb}}" alt=""></div>
+							<div id="comment-name">
+								<div>{{group.name}}</div>
+							</div>
+							<div id="checkgroups">
+								<input ng-click="selectGroup(group)" type="checkbox"/>
+								<div ng-click="selectGroup(group)" ng-show="group.checked"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div id="error">
+		</div>
+	</div>
+</div>

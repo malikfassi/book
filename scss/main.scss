@@ -1,0 +1,3337 @@
+@import "modules/mixins";
+
+#menu-left {
+	z-index: 0;
+	display: none;
+	float:left;
+	position: fixed;
+	height: 100%;
+	width: 80%;
+	background-color:#666;
+	border-bottom: 2px #b3b3b3 solid;
+	display:none;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	ul {
+		text-align: left;
+		display: block;
+		position: relative;
+		.title-menu {
+			background-color: #404040;
+			color:#c4c4c4;
+			border-bottom: #1d1d1d 1px solid;
+		}
+		li {
+			padding-left: 23px;
+			padding-top: 25px;
+			padding-bottom: 25px;
+			border-bottom: #b3b3b3 solid 1px;
+			font-size: 18px;
+			font-weight: lighter;
+			a:-webkit-any-link {
+				color:#fff;
+				span {
+					position: relative;
+					margin-left: 7px;
+					color: #fff;
+				}
+			}
+		}
+		li#resp-groups {
+			background-color: #666;
+			padding-left: 23px;
+			padding-right: 23px;
+			padding-top: 10px;
+			#search-bar {
+				border: none;
+				color:#b3b3b3;
+				height: auto;
+				display: table;
+				div.magn-glass {
+					border: none;
+					float: left;
+					@include nascar-sprite(2, 3, 20px, 20px, 1px, 1px, 0.7);  
+					display:table-cell;
+				}
+				#input-search-wrapper {
+					width: auto;
+					border-right: none;
+					height: auto;
+					line-height: normal;
+					display:table-cell;
+					font-size: 18px;
+				}
+				input.searchbar {
+					font-size: 20px;
+					line-height: 20px;
+					height:20px;
+					background-color: #666;
+					font-weight: lighter;
+					background-color: #666;
+				}
+				input.searchbar:focus {
+					outline: none;
+				}
+				@include placeholder {
+					font-size: 20px;
+					font-weight: lighter;
+				}
+			}
+			#group-nav div {
+				font-size: 24px;
+				width: 50%;
+				float: left;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				color: #fff !important;
+				display: table-cell;
+			}
+			#group-nav {
+				width:100%;
+				border: none;
+				cursor: pointer;
+				display: inline-block;
+				margin-top: 10px;
+				display: table;
+				padding-top: 25px;
+				border-bottom: #b3b3b3 solid 1px;
+				font-size: 18px;
+				font-weight: lighter;
+			}
+			#all-groups {
+				margin-top: 10px;
+				padding-bottom: 10px;
+				overflow-y: scroll;
+			}
+			#add-group-resp {
+				cursor: pointer;
+				height: 30px;
+				> div {
+					@include nascar-sprite(7, 3, 20px, 20px, 2px, 0px, 0.5);
+					float: left;
+				}
+				> span {
+					float: left;
+					font-size: 20px;
+					margin-left: 5px;
+					margin-top: 3px;
+				}
+			}
+			.filtered-group {
+				padding-left: 23px;
+				padding-top: 25px;
+				padding-bottom: 25px;
+				border-bottom: #b3b3b3 solid 1px;
+				font-size: 18px;
+				font-weight: lighter;
+				display: block;
+				div.round-pict {
+					margin-top: 5px;
+					margin-bottom: 5px;
+				}
+				span {
+					margin-left: 10px;
+					margin-top: 16px;
+					margin-bottom: 5px;
+					position: relative;
+					color: #fff;
+					font-size: 18px;
+				}
+				.key {
+					margin-top: 15px;
+					position: relative;
+					right: 0px;
+					margin-left: 5px;
+					display:inline-block;
+				}
+			}
+		}
+	}
+}
+#new {
+	margin-top: 45px;
+}
+#navigation {
+	li.spec a{
+		margin-left: 9px;
+		margin-top: 3px;
+		display:inline-block;
+		color: #fff;
+	}
+}
+
+#page-wrap {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	padding-top: 100px;
+	@media only screen and (max-width: 768px){
+		padding-top: 50px;
+	}
+	background-image: url("../images/background.png");
+}
+
+#border-left {
+	border-left: 2px #b3b3b3 solid;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	top: 46px;
+}
+#resp-nav-wrap {
+	width: 100%;
+	background-color: #fff;
+	height:50px;
+	border-bottom: 2px #b3b3b3 solid;
+	float: left;
+	position: fixed;
+	z-index: 100;
+	display: none;
+	@media only screen and (max-width: 768px){
+		display:block;
+	}
+}
+#resp-navbar-left {
+	position: relative;
+	background-color: #fff;
+	font-weight: lighter;
+	font-family: Lato;
+	@include font-size(16px);
+	display:none;
+	z-index:51;
+	float: left;
+	@media only screen and (max-width: 768px){
+		display:block;
+	}
+	span {
+		> div.three-bars{
+			cursor: pointer;
+			width:25px;
+			margin-top:9px;
+			float: left;
+			vertical-align:middle;
+			display:inline-block;
+			margin-left:9px;
+			div {
+				width:100%;
+				border-bottom: 2px #b3b3b3 solid;
+				border-top: 2px #b3b3b3 solid;
+				border-right: 2px #b3b3b3 solid; 
+				height: 2px;
+				margin-top: 4px;
+			}
+		}
+		> div.active-navbar {
+			margin-top:15px;
+			margin-left: 34%;
+		}
+	}
+}
+#menu-right {
+	display:none;
+	width: 80%;
+	z-index: 0;
+	background-color: #fff;
+	height: 100%;
+	float:right;
+	position: fixed;
+	right: 0px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	border-bottom: 2px #b3b3b3 solid;
+	color: #fff;
+	background-color: #666;
+	#menu-right-container {
+		margin-top: 47px;
+	}
+	.no-notif {
+		height: 20px;
+		text-align: center;
+	}
+	.notification-container {
+		position: relative;
+		height: auto;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding-right: 0px;
+		padding-left: 0px;
+		padding-bottom: 10px;
+		border-bottom: 1px #b3b3b3 solid;
+		#notifier_id{
+			height: 36px;
+			span {
+				margin-left: 7px;
+			}
+		}
+		.notification
+		{
+			margin-top : -18px;
+			display : block;
+			float : none;
+			margin-left : 43px;
+			font-weight : lighter;
+		}
+		.notif-time {
+			float : none;
+			margin-left : 45px;
+		}
+		.post-color {
+			padding-left : 0px;
+		}
+	}
+}
+
+#resp-navbar-right {
+	position: relative;
+	float:right;
+	right: 0px;
+	background-color: #fff;
+	font-weight: lighter;
+	font-family: Lato;
+	@include font-size(16px);
+	display:none;
+	z-index: 50;
+	#notif-spot {
+		position: static;
+		cursor: pointer;
+	}
+	@media only screen and (max-width: 480px){
+		display:block;
+	} 
+	@media only screen and (max-width: 768px){
+		display:block;
+	}
+	span {
+		> div{
+			margin-right: 8px;
+			margin-top: 14px;
+			float:right;
+		}
+	}
+}
+
+navbar {
+	display: block;
+}
+.navbar {
+	height:100px;
+	width:100%;
+	background-color:#ffffff;
+	margin-top:0px;
+	margin-right:0px;
+	margin-left: 0px;
+	@include font-size(18px);
+	@media only screen and (max-width: 480px){
+		font-size:10px;
+		display:none;
+	}
+	@media only screen and (max-width: 768px){
+		display:none;
+	}
+	color: #B3B3B3;
+	z-index:1000;
+	position:absolute;
+	top:0px;
+}
+
+.navbar-container {
+	margin-left:auto;
+	margin-right:auto;
+	height:100px;
+	width:72%;
+	@media only screen and (max-width: 480px){
+		width: 87%;
+	}
+}
+#add-group-wrap {
+	width: 100%;
+	height: 20px;
+	position: relative;
+}
+.navbar-elem {
+	margin-top: 46px;
+	width:70%;
+	li {
+		float:left;
+		margin-left: 7%;
+		font-weight: lighter;
+		@media only screen and (max-width: 1100px){
+			margin-left:5%;
+			font-size:17px;
+		}
+		@media only screen and (max-width: 900px){
+			margin-left:3%;
+			font-size:17px;
+		}
+		@media only screen and (max-width: 795px){
+			font-size:16px;
+		}
+		a:-webkit-any-link {
+			color:#b3b3b3;
+		}
+	}
+	height:20px;
+	float:left;
+}
+
+.navbar-pict {
+	img {
+		float:left;
+		width:64px;
+		height:64px;
+	}
+	padding-top: 18px;
+	height:64px;
+	float:left;
+}
+
+.round-pict {
+	border-radius: 50%;
+}
+
+.tiles-pict {
+	height: 65px;
+	width: 65px;
+	display: inline-block;
+	vertical-align: top;
+}
+#main-wrapper {
+	width: 100%;
+	height: 100%;
+	> div {
+		overflow: scroll;
+		width: 100%;
+		height: 100%;
+	}
+}
+.tiles-content-container
+{
+	padding-top: 5%;
+	padding-left: 7%;
+	padding-right: 7%;
+	> div:nth-of-type(1)
+	{
+		height: auto;
+		width: 100%;
+		border-bottom: 1px dotted #666;
+		padding-bottom: 5px;
+		span {
+			display: inline-block;
+			vertical-align: top;
+			float: right;
+			margin-top: -15px;
+		}
+	}
+	div.wrapper > img, div.wrapper > div{
+		display:table-cell;
+		vertical-align: middle;
+		padding-left: 2%;
+	}
+	div.wrapper {
+		display:table;
+		width: 100%;
+	}
+
+}
+
+.tiles-border {
+	border-color: #B3B3B3;
+	border-bottom-width: 2px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-style:solid;
+}
+
+.tiles {
+	background-color: #ffffff;
+	width:67%;
+	@media only screen and (max-width: 768px){
+		width:87%;
+	}
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 54px;
+	padding-bottom: 17px;
+	position: relative;
+}
+
+div.title-container {
+	color: #666666;
+}
+
+.tiles-title {
+	display: block;
+	@include font-size(24px);
+	@media only screen and (max-width: 480px){
+		font-size: 19px !important;
+	}
+	@media only screen and (max-width: 768px){
+		font-size: 21px;
+	}
+	font-weight: bold !important;
+}
+
+.title-time {
+	@include font-size(14px);
+	font-weight: normal;
+	min-width: 77px;
+	color: #666;
+}
+
+.active-navbar {
+	color:#79BC2F !important;
+	font-weight: bold !important;
+}
+
+.article-title {
+	margin-top: 21px;
+	@include font-size(19px);
+	@media only screen and (max-width: 480px){
+		font-size:17px !important;
+	}
+	color:#666;
+}
+
+.article-container {
+
+}
+
+.article-content {
+	margin-top : 13px;
+	@include font-size(19px);
+	font-weight: lighter;
+	color:#666;
+}
+.article-link {
+	color: #662D91 !important;
+	margin-top: 13px;
+	@include font-size(15px);
+	font-style:italic;
+	display: inline-block;
+	overflow: auto;
+}
+
+.detail-container {
+	margin-top: 21px;
+	border-top: 1px #666 dotted;
+	width: 100%;
+	text-align: center;
+	padding-top:2%;
+	padding-bottom: 2%;
+	> div {
+		margin-left: auto;
+		margin-right: auto;
+		display: inline;
+		div:nth-of-type(1)
+		{
+			.icon-detail{
+				margin-left:0px !important;
+			}
+		}
+	}
+}
+.icon-detail {
+	height:10px;
+	width:10px;
+	margin-left:56px;
+	@media only screen and (max-width: 480px){
+		margin-left: 20px !important;
+	}
+	@media only screen and (max-width: 768px){
+		margin-left: 32px;
+	}
+}
+.detail {
+	display:inline-block;
+	@include font-size(12px);
+	@media only screen and (max-width: 480px){
+		font-size: 9px !important;
+	}
+	span:nth-of-type(2) {
+		margin-left: 3px;
+	}
+	span {
+		cursor: pointer;
+	}
+}
+
+.profile-dropdown {
+	position:absolute;
+	width:400px;
+	background-color: #ffffff;
+	margin-top:123px;
+	margin-left:-95px;
+}
+
+#feed {
+	.rsvp {
+		width: auto;
+	}
+}
+
+.dropdown-profile-pict {
+	width:36px;
+	height:36px;
+}
+
+.mini-nav-drop {
+	height:65px;
+	border-bottom-width: 1px;
+}
+#profile-link {
+	float:left;
+	margin-left:19px;
+	margin-top:21px;
+}
+
+#profile-icon {
+	@include nascar-sprite(3, 3, 20px, 20px, 0px, 0px, 0.8);  
+	float:left;
+	margin-top:2px;
+}
+
+#profile-link span {
+	margin-left:16px;
+	@include font-size(20px);
+	color:black;
+}
+
+#logout-link {
+	float:right;
+	margin-right:19px;
+	margin-top:21px;
+	cursor: pointer;
+}
+
+#logout-link span {
+	margin-left:16px;
+	@include font-size(20px);
+	color: #D4000E;
+	font-weight: bold;
+}
+
+#logout-icon {
+	@include nascar-sprite(2, 2, 20px, 20px);  
+	height:20px;
+	width:20px;
+	float:left;
+	margin-top:2px;
+}
+
+
+.notification-container {
+	padding-top:23px;
+	margin-left:19px;
+	height:66px;
+	margin-right:19px;
+	height: 73px;
+	border-bottom: 1px dotted; 
+	position: relative
+}
+.no-notif {
+	height: auto;
+	text-align: center;
+	padding: 10px;
+	border: none;
+}
+.notification-container .dropdown-profile-pict {
+	float:left;
+}
+.notification {
+	max-width: 297px;
+	float:left;
+	margin-left:14px;
+}
+
+.name-color {
+	padding-right:4px;
+	color: #662E91 !important;
+}
+
+.post-color {
+	padding-left: 4px;
+	color:#79BC2E !important;
+}
+
+.notif-time {
+	@include font-size(14px);
+	position: absolute;
+	right: 19px;
+	bottom: 5px;
+	color:#B3B3B3;
+}
+
+.profile-dropdown-footer {
+	height:43px;
+	margin-bottom: 0px;
+	padding-top:12px;
+	text-align: center;
+	font-weight: lighter;
+	@include font-size(16px);
+}
+
+.hidden {
+	display:none;
+}
+
+.dropdown-active {
+	display:block;
+	z-index:5;
+}
+
+.second-img-navbar {
+	float:right;
+	margin-top:20px;
+	text-align: center;
+	@media only screen and (max-width: 480px){
+		margin-top: 27px;
+	}
+}
+
+.second-img-navbar div{
+	height:44px;
+	width:44px;
+}	
+
+.second-img-navbar span {
+	font-size: 13px;
+	color: #666;
+	display: block;
+	font-weight: lighter;
+}
+.second-drop-navbar {
+	position:absolute;
+	margin-top:123px;
+	right:140px;
+	background-color: #ffffff;
+	width:354px;
+	font-size:0px;
+}
+
+
+.magn-glass {
+	@include nascar-sprite(2, 3, 65px, 60px, 1px, 1px);  
+}
+
+
+#search-bar {
+	display: table;
+	border-bottom : 1px solid;
+	position:relative;
+	width:100%;
+	div.magn-glass {
+		border-right: 1px solid;
+		display:inline-block;
+		vertical-align: top;
+	}
+	div#input-search-wrapper {
+		vertical-align: top;
+		display:inline-block;
+		padding-left: 5px;
+		padding-right: 5px;
+		width:224px;
+		border-right: 1px #b3b3b3 solid;
+		input {
+			color : #b3b3b3;
+			border: none;
+			font-size: 22px;
+			font-weight: lighter;
+			width: 100%;
+			height: 60px;
+		}
+	}
+	input:focus {
+		outline: none;
+	}
+	input {
+		@include placeholder {
+			color:#b3b3b3;
+			font-weight: lighter;
+		}
+	}
+	a {
+		vertical-align: top;
+		display: inline-block;
+	}
+}
+
+#search-bar span {
+	padding-right: 82px;
+	padding-top: 16px;
+	@include font-size(24px);
+	font-weight:lighter;
+	vertical-align: top;
+	height:auto;
+}
+
+
+#plus-sign {
+	@include nascar-sprite(7, 3, 60px, 60px, 2px, 0px, 0.5);  
+	font-size:0px;
+}
+
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 11px solid #ffffff;
+}
+
+#first-arrow {
+	margin-top: -10px;
+	margin-left: 117px;
+}
+
+#group-nav {
+	position: relative;
+	div {
+		cursor: pointer;
+		display: inline-block;
+		vertical-align: top;
+		text-align: center;
+		width: 175px;
+		@include font-size(24px);
+		font-weight: lighter;
+		padding-top:18px;
+		padding-bottom:18px;
+	}
+}
+
+#group-nav div:nth-of-type(2) {
+	border-left:1px solid #b3b3b3;
+	width:178.5px;
+}
+
+#group-nav {
+	border-bottom: 1px solid #b3b3b3;
+}
+
+.group-nav-active {
+	background-color:#79BC2E;
+	color:#fff;
+}
+
+.group-elem {
+	height:86px;
+	width:inherit;
+	border-bottom: 1px dotted #b3b3b3;
+	width:320px;
+	margin-left:17px;
+	margin-right:17px;
+	cursor: pointer;
+	position: relative;
+	.icon {
+		position: absolute;
+		right: 0;
+		top: 28px;
+	}
+}
+
+.filtered-group {
+	position: relative;
+	.icon {
+		position: absolute;
+		right: 0;
+		top: 37px;
+	}
+}
+
+.group-image {
+	height:44px;
+	width:44px;
+	margin-top:21px;
+	margin-bottom:21px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.group-name {
+	@include font-size(14px);
+	margin-top:35px;
+	font-weight: lighter;
+	margin-left: 21px;
+	color:#000;
+	display: inline-block;
+}
+
+.groups {
+	max-height: 350px;
+	overflow-y:scroll;
+}
+
+.second-drop-navbar .groups > div.group-elem:last-of-type {
+	border:none;
+}
+
+.key {
+	@include nascar-sprite(1, 3, 40px, 26px);  
+	display: inline-block;
+	vertical-align: top;
+	right:17px;
+	margin-top:31px;
+	float: right;
+}
+
+#second-arrow {
+	margin-top: -10px;
+	margin-left: 260px;
+}
+
+#settings-dropdown {
+	height:60px;
+	background-color: #fff;
+	position:absolute;
+	margin-top:123px;
+	width:232px;
+	margin-left:490px;
+	@include font-size(17px);
+	color:#5D5D5D;
+	span {
+		margin-top:19px;
+		margin-left:30px;
+		position:absolute;
+	}
+}
+#settings-arrow {
+	margin-top: -10px;
+	margin-left: 125px;
+}
+
+.addnew-dropdown div.addnew-container:last-of-type{
+	border:none
+}
+.addnew-dropdown {
+	width: 355px; 
+}
+
+.addnew-container {
+	margin-top:26px;
+	margin-left:18px;
+	border-bottom: 1px dotted #b3b3b3;
+	margin-right:18px;
+	padding-bottom: 20px;
+}
+
+#post-icon {
+	@include nascar-sprite(1, 1, 21px, 22px, -1px, -1px, 0.73);
+	display: inline-block !important;
+	vertical-align: top;
+}
+
+#poll-icon {
+	@include nascar-sprite(1, 2, 21px, 22px, -1px, -1px, 0.73);
+	display: inline-block !important;
+	vertical-align: top;  
+}
+
+#event-icon {
+	@include nascar-sprite(5, 1, 21px, 22px, -1px, -1px, 0.73);
+	display: inline-block !important;
+	vertical-align: top;
+}
+
+.addnew-name {
+	color:#5D5D5D;
+	margin-left:22px;
+	display: inline-block;
+	vertical-align: top;
+	position : absolute;
+}
+
+#addnew-button {
+	@include nascar-sprite(1, 0, 19px, 20px, 0px, 0px,1);  
+	z-index: 4;
+	position:absolute;
+	top:0px;
+	right:0px;
+	cursor:pointer;
+}
+
+.profile-buttons {
+	position: relative;
+	height:67px;
+	width:81px;
+	#notif-spot {
+		padding-top: 0px;
+		padding-right: 2px;
+	}
+}
+
+#notif-spot {
+	position:absolute;
+	bottom:0px;
+	height:22px;
+	width:22px;
+	line-height: 22px;
+	display: inline-block;
+	text-align: center;
+	left:0px;z-index:4;
+	background-color:#C2332D;
+	color:#fff;
+	text-align:center;
+	left:42px;
+	@include font-size(16px);
+	padding-right: 1px;
+}
+
+#mask{
+	width:100%;
+	height:100%;
+	background-color:#000;  
+	opacity: 0.7;
+	filter: alpha(opacity=40); //For IE8 and earlier
+	z-index:4;
+	position: fixed;
+	top:0px;
+}
+
+// EVENTS
+
+.event-container {
+	padding-top:7%;
+	position:relative;
+	margin-left: auto;
+	margin-right: auto;
+	width:85%;
+	#event-details {
+		border: none;
+		margin-top: 0px !important;
+		margin-top:10px;
+		padding-top: 3%;
+	}
+}
+
+#events { 
+	.tiles {
+		@media only screen and (max-width: 480px){
+			width:87%;
+		}
+	}
+	.tiles-title {
+		@media only screen and (max-width: 480px){
+			width:100%;
+		}
+	}
+}
+
+#event-tiles {
+}
+
+.event-title {
+	color: #666666;
+	@include font-size(28px);
+	@media only screen and (max-width: 768px){
+		font-size: 24px;
+	}
+	display: inline-block;
+	vertical-align: top;
+}
+
+#event-name-details {
+	margin-left: 2%;
+}
+
+.event-time-pub {
+	width:auto;
+	font-weight: lighter;
+	@include font-size(14px);
+	color: #666666;
+	display: block;
+	padding-top:3px;
+	span {
+		font-weight: normal;
+	}
+	@media only screen and (max-width: 768px){
+	}
+	@media only screen and (max-width: 480px){
+	}
+}
+
+.event-header {
+	border-bottom: 1px dotted #666666;
+	display:block;
+	padding-bottom: 10px;
+	#event-name-details
+	{
+		display: inline-block;
+		vertical-align:top;
+		width: 72%;
+		margin-left: 2%;
+	}
+	> div.round-pict {
+		display: inline-block;
+		vertical-align: top;
+	}
+	.event-time-pub > div {
+		display: inline-block;
+		@media only screen and (max-width: 480px){
+			display: block;
+		}
+	}
+}
+
+.event-time-loc {
+	margin-top:16px;
+	width:100%;
+	padding-bottom:12px;
+	border-bottom: 1px dotted #666666;
+	#geoloc-wrapper {
+		position:relative;
+	}
+}
+
+.event-time {
+	color:#79BC2E;
+	@include font-size(24px);
+	@media only screen and (max-width: 768px){
+		font-size: 22px;
+	}
+	display: inline-block;
+	vertical-align: top;
+	margin-left:18px;
+	width:85%;
+}
+
+.event-loc {
+	font-weight: lighter;
+	@include font-size(14px);
+	color:#666666;
+	display: inline-block;
+	vertical-align: top;
+	margin-left:18px;
+	margin-top:6px;
+	width: 85%;
+}
+
+.calendar-icon {
+	margin-top:8px;
+	vertical-align: top;
+	@include nascar-sprite(5, 0, 13px, 13px, 0px, 0px,0.5); 
+	display: inline-block;
+}
+
+.geoloc-icon {
+	margin-left:2px;
+	@include nascar-sprite(6, 0, 10px, 13px, -1px, -2px, 0.4); 
+	margin-top:8px;
+	vertical-align: top;
+	display: inline-block;
+}
+
+.arrow-icon {
+	@include nascar-sprite(5, 3, 10px, 16px, 0px, 0px, 0.8); 
+	vertical-align: top;
+	display: inline-block;
+	right:0px;
+	position:absolute;
+	margin-top:6px;
+}
+
+.event-short-descr {
+	display:block;
+	margin-top:15px;
+	@include font-size(18px);
+	font-weight: lighter;
+	color:#666;
+	padding-bottom: 14px;
+	a {
+		color: #662D91;
+		font-style:italic;
+		@include font-size(14px);
+		display:block;
+	}
+	border-bottom: 1px dotted #666;
+}
+
+.rsvp-attendees {
+	border-bottom: 1px dotted #666;
+	padding-bottom:8px;
+}
+
+.rsvp {
+	font-weight: lighter;
+	@include font-size(24px);
+	color:#666;
+	width:45%;
+	vertical-align: top;
+	display: inline-block;
+	margin-top:12px;
+	@media only screen and (max-width: 768px){
+		width: 100%;
+	}
+}
+
+.choice {
+	cursor: pointer;
+	margin-top:9px;
+	font-size:0px;
+	input {
+		border: 1px solid #7D7D7D;
+		-webkit-appearance: none;
+		vertical-align: top;
+		display: inline-block;
+		width:17px;
+		height: 17px;
+		margin-top:5px;
+		cursor: pointer;
+
+	}
+	input:focus {
+		outline:none;
+	}
+	span {
+		font-size: 24px;
+		@media only screen and (max-width: 950px){
+			font-size: 20px;
+		}
+		vertical-align: top;
+		display: inline-block;
+		margin-left: 5px;
+	}
+}
+
+.attendees {
+	vertical-align: top;
+	display: inline-block;
+	margin-top:11px;
+	padding-left:4%;
+	width: 54%;
+	border-left: 1px dotted #666;
+	min-height: 121px;
+	position: relative;
+	@media only screen and (max-width: 768px){
+		width: 100%;
+		border-left: none;
+		border-top: 1px dotted #666;
+		padding-left: 0px;
+		min-height: auto;
+	}
+	div.round-pict {
+		height:64px;
+		width:64px;
+		margin-right:12px;
+		margin-top:10px;
+		display:inline-block;
+		vertical-align: bottom;
+	}
+	span.other_attendees {
+		display:block;
+		margin-top:20px;
+		@include font-size(14px);
+		font-weight: lighter;
+		color:#666;
+	}
+	span.attending {
+		margin-top:20px;
+		@include font-size(14px);
+		font-weight: lighter;
+		color:#666;
+		display:inline-block;
+		vertical-align: bottom;
+	}
+	span.green {
+		color:#79BC2E;
+	}
+	span.red {
+		color:#C1272D;
+	}
+	span.yellow {
+		color:#F1B500;
+	}
+	#show_more {
+		font-size: 14px;
+		font-weight: lighter;
+		color: #666;
+		position: absolute;
+		right: 0px;
+		bottom: 0px;
+		cursor: pointer;
+	}
+}
+
+#event-details {
+	margin-top: 36px !important;
+}
+
+span.attending_selected {
+	color:#79BC2E;
+}
+
+span.maybe_selected {
+	color:#F1B500;
+}
+
+span.not_attending_selected {
+	color:#C1272D;
+}
+
+input.attending_selected {
+	@include nascar-sprite(0, 1, 17px, 17px, -1px, -3px, 0.5); 
+	display: inline-block;
+}
+
+input.maybe_selected {
+	@include nascar-sprite(0, 2, 17px, 17px, -1px, -2px, 0.5); 
+	display: inline-block;
+}
+
+input.not_attending_selected {
+	@include nascar-sprite(0, 3, 17px, 17px, -1px, -1px, 0.5); 
+	display: inline-block;
+}
+#group-name::-webkit-input-placeholder { /* WebKit browsers */
+	color:    #B3B3B3;
+}
+
+#group-name:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#group-name::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#group-name:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color:    #B3B3B3;
+}
+
+#add-group {
+	#add-group-wrapper {
+		width: 823px;
+		padding-top: 37px;
+		padding-bottom: 60px;
+		padding-right: 70px;
+		padding-left: 70px;
+		#addnew-header {
+			@media only screen and (max-width: 768px){
+				height: 70px;
+			}
+			@media only screen and (max-width: 480px){
+				height: auto;
+			}
+		}
+		@media only screen and (max-width: 768px){
+			width: 490px;
+		}
+		@media only screen and (max-width: 480px){
+			width: 310px;
+			padding-left: 30px;
+			padding-right: 30px;
+			padding-bottom: 30px;
+		}
+		#description {
+			textarea {
+				min-height: 150px;
+			}
+		}
+	}
+}
+
+#addnew-header {
+	width: 100%;
+	border-bottom: 1px dotted #666;
+	height: 70px;
+	position: relative;
+	@media only screen and (max-width: 480px){
+		display:inline-block;
+		height:auto;
+		padding-bottom: 5px;
+	}
+	@media only screen and (max-width: 768px){
+		height:auto;
+		padding-bottom: 5px;
+	}
+	span {
+		position: absolute;
+		right: 0px;
+		color: #662D91;
+		@include font-size(16px);
+		font-weight: lighter;
+		bottom: 0px;
+		margin-top:4px;
+		margin-bottom: 3px;
+		@media only screen and (max-width: 480px){
+			position:relative;
+		}
+	}
+	input#group-name {
+		display: inline-block;
+		vertical-align: top;
+		height:49px;
+		border:none;
+		font-weight: bold;
+		@include font-size(28px);
+		font-family: Lato;
+		color:#666;
+		width: 630px;
+		@media only screen and (max-width: 768px){
+			width: 299px;
+		}
+		@media only screen and (max-width: 480px){
+			width: 253px;
+		}
+	}
+	input#group-name:focus {
+		outline:none;
+	}
+}
+
+#camera-icon {
+	@include nascar-sprite(7, 1, 48px, 48px, -1px, -1px, 0.7); 
+	background-color: #662D91;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.diagline {
+	width: 112px;
+	height: 47px;
+	border-bottom: 1px solid red;
+	-webkit-transform:
+	translateY(-20px)
+	translateX(5px)
+	rotate(27deg); 
+	position: absolute;
+	/* top: -20px; */
+}
+
+#little-video-icon {
+	@include nascar-sprite(7, 0, 48px, 48px, 0px, -1px, 0.7); 
+	background-color: #662D91;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 5px;
+}
+
+#big-video-icon {
+	@include nascar-sprite(7, 0, 65px, 65px, 0px,-2px, 1); 
+	background-color: #662D91;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 5px;
+}
+
+#icons {
+	cursor:pointer;
+	display: inline-block;
+	vertical-align: top;
+	right:0px;
+	position:absolute;
+	input[type="file"]{
+		visibility: hidden;
+		position:absolute;
+	}
+	@media only screen and (max-width: 480px){
+		position:relative;
+		float:right;
+		right:auto;
+	}
+}
+
+#description {
+	padding-top: 11px;
+	padding-bottom: 11px;
+	border-bottom: 1px dotted #666; 
+	textarea {
+		width: 100%;
+		height: 100%;
+		resize: none;
+		border: none;
+		@include font-size(18px);
+		font-weight: lighter;
+		color: #666;
+	}
+	textarea:focus {
+		outline: none;
+	}
+	div {
+		color: #662D91;
+		font-weight: lighter;
+		@include font-size(12px);
+	}
+	span {
+		display: block;
+		@include font-size(18px);
+		font-weight: lighter;
+		color: #662D91;
+		div {
+			display: inline-block;
+		}
+	}
+	input {
+		border: none;
+		@include font-size(15px);
+		font-weight: lighter;
+		color:#666;
+		display: inline-block;
+		margin-left: 5px;
+	}
+	input:focus {
+		outline: none;
+	}
+	input::-webkit-input-placeholder {
+		@include font-size(15px);
+		font-weight: lighter;
+		color: #662D91;
+	}
+}
+
+#description textarea::-webkit-input-placeholder { /* WebKit browsers */
+	color: #B3B3B3;
+}
+#description textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#description textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#description textarea:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color:    #B3B3B3;
+}
+
+#members {
+	padding-top: 17px;
+	padding-bottom: 17px;
+	color: #666;
+	@include font-size(14px);
+	font-weight: lighter;
+	border-bottom: 1px dotted #666;
+	#members-pict {
+		margin-top:11px;
+		#member {
+			vertical-align: top;
+			cursor: pointer;
+			display: inline-block;
+			margin-right: 11px;
+			.cross {
+				display:none;
+				position:absolute;
+				margin-top: -50px;
+				margin-left: 22px;
+				color: #fff;
+				font-size: 27px;
+			}
+		}
+		.hoverblur:hover {
+			div.round-pict {
+				-webkit-filter: blur(2px);
+				-moz-filter: blur(2px);
+				-o-filter: blur(2px);
+				-ms-filter: blur(2px);
+				filter: blur(2px);
+			}	
+			.cross {
+				display: block !important;
+			}		
+		}
+		display: block;
+		img {
+			height: 63px;
+			width: 63px;
+			display: inline-block;
+		}
+
+		> div.plus {
+			@include nascar-sprite(7, 2, 63px, 63px, 0px, -1px, 0.6); 
+			display:inline-block;
+			height: 65px;
+			width: 65px;
+			background-color: #79BC2F;
+			margin-right: 11px;
+			cursor: pointer;
+		}
+	}
+}
+
+#is-private {
+	padding-top: 17px;
+	padding-bottom: 17px;
+	border-bottom: 1px dotted #666;
+}
+
+span.private {
+	color: #C1272D;
+}
+.border-bottom {
+	border-bottom:1px #666 dotted;
+}
+input.private{
+	@include nascar-sprite(0, 3, 17px, 17px, -3px, -2px, 0.45); 
+	display: inline-block;
+}
+
+#addgroup-confirm {
+	position:relative;
+	margin-top:30px;
+	bottom: 15px;
+	font-weight: normal;
+	@include font-size(24px);
+	@media only screen and (max-width: 480px){
+		display:inline-block;
+		vertical-align: top;
+		width: 100%;
+	}
+	.addgroup-buttons {
+		border: 0;
+		height: 40px;
+		width: 124px;
+		@media only screen and (max-width: 480px){
+			width: 122px;
+		}
+		font-family: Lato;
+		border-radius: 0px;
+		cursor: pointer;
+		@include font-size(15px);
+		color: #fff;
+	}
+	div {
+		position: absolute;
+		right: 155px;
+		a {
+			margin-top: 9px;
+			position: absolute;
+			margin-left: 50px;
+		}
+		@media only screen and (max-width: 480px){
+			display:inline-block;
+			vertical-align: top;
+			position: relative;
+			right: auto;
+		}
+	}
+	input {
+		position: absolute;
+		right: 0px;
+		background: #79BC2E;
+		@media only screen and (max-width: 480px){
+			display:inline-block;
+			vertical-align: top;
+			position: relative;
+			right: auto;
+		}
+	}
+	input:focus {
+		outline: none;
+	}
+	span { 
+		position: absolute;
+		right: 0px;
+		cursor: pointer;
+		a,input {
+			font-weight: bold;
+			@include font-size(21px);
+			color: #666;
+			border: none;
+			cursor: pointer;
+		}
+		input {
+			color: #fff;
+			font-weight: lighter;
+			padding-bottom: 5px;
+			padding-top: 5px;
+			width: 190px;
+		}
+	}
+}
+
+#post-icon-title {
+	@include nascar-sprite(1, 1, 29px, 27px, -1px, -1px, 1);
+	display: inline-block !important;
+	vertical-align: top;
+	margin-top: 11px;
+	margin-right: 8px;
+}
+
+input#post-title {
+	display: inline-block;
+	vertical-align: top;
+	height:49px;
+	border:none;
+	font-weight: bold;
+	@include font-size(28px);
+	font-family: Lato;
+	color:#666;
+	width: 520px;
+	@media only screen and (max-width: 768px){
+		width: 245px;
+	}
+	@media only screen and (max-width: 480px){
+		width: 209px;
+	}
+}
+input#post-title:focus {
+	outline:none;
+}
+#poll-title::-webkit-input-placeholder { /* WebKit browsers */
+	color:    #B3B3B3;
+}
+
+#poll-title:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#poll-title::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#poll-title:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color:    #B3B3B3;
+}
+input#poll-title {
+	display: inline-block;
+	vertical-align: top;
+	height:49px;
+	border:none;
+	font-weight: bold;
+	@include font-size(28px);
+	font-family: Lato;
+	color:#666;
+	width: 520px;
+	@media only screen and (max-width: 768px){
+		width: 245px;
+		font-size: 24px;
+	}
+	@media only screen and (max-width: 480px){
+		width: 209px;
+		font-size: 22px;
+	}
+}
+input#poll-title:focus {
+	outline:none;
+}
+
+#post-title::-webkit-input-placeholder { /* WebKit browsers */
+	color:    #B3B3B3;
+}
+
+#post-title:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#post-title::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:    #B3B3B3;
+	opacity:  1;
+}
+#post-title:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color:    #B3B3B3;
+}
+
+#post-desc {
+	height: 109px !important;
+}
+
+#pictures {
+	div {
+		margin-right:11px;
+		margin-top:5px;
+		width: 65px;
+		height: 65px;
+		display:inline-block;
+		cursor:pointer;
+	}
+	div.pict{
+		background-size: cover;		
+	}
+	span {
+		display: block;
+		margin-top: 10px;
+		color: #666;
+		font-weight: lighter;
+	}
+}
+#add-post {
+	#add-post-wrapper {
+		width: 823px;
+		@media only screen and (max-width: 768px){
+			width: 540px;
+		}
+		@media only screen and (max-width: 480px){
+			width: 310px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-right: 30px;
+			padding-left: 30px;
+		}
+		padding-top: 37px;
+		padding-bottom: 54px;
+		padding-right: 70px; 
+		padding-left: 70px;
+	}
+	#addnew-header {
+		@media only screen and (max-width: 768px){
+			height: 70px;
+		}
+		@media only screen and (max-width: 480px){
+			height: auto;
+		}
+	}
+}
+
+#poll-icon-title {
+	@include nascar-sprite(1, 2, 29px, 27px, -1px, -1px, 1);
+	display: inline-block !important;
+	vertical-align: top;
+	margin-top: 12px;
+	margin-right: 8px;
+}
+
+#poll-choices {
+	padding-top: 11px;
+	padding-bottom: 11px;
+	min-height: 128px;
+	border-bottom: 1px dotted #666; 
+	position: relative;
+	input {
+		border: none;
+		font-weight: lighter;
+		@include font-size(21px);
+		color: #666;
+		display: block;
+		margin-top: 5px;
+		width:100%;
+	}
+	input:focus {
+		outline: none;
+	}
+	span {
+		bottom : 18px;
+		font-weight: lighter;
+		@include font-size(14px);
+		color: #79BC2F;
+		cursor: pointer;
+		display:block;
+		margin-top: 20px;
+	}
+}
+
+#poll-choices input::-webkit-input-placeholder { /* WebKit browsers */
+	color:    #B3B3B3;
+	font-weight: lighter !important;
+	@include font-size(21px);
+}
+
+#poll-choices input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:    #B3B3B3;
+	font-weight: lighter;
+	@include font-size(21px);
+	opacity:  1;
+}
+#poll-choices input::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:    #B3B3B3;
+	font-weight: lighter;
+	@include font-size(21px);
+	opacity:  1;
+}
+#poll-choices input:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color:    #B3B3B3;
+	font-weight: lighter;
+	@include font-size(21px);
+}
+
+#event-icon-title {
+	@include nascar-sprite(5, 1, 24px, 26px, -1px, -1px, 1);
+	display: inline-block !important;
+	vertical-align: top;
+	margin-top: 12px;
+	margin-right: 8px;
+}
+
+#geo-icon {
+	@include nascar-sprite(6, 1, 10px, 14px, 0px, -2px, 0.45); 
+	margin-top: 4px;
+	margin-right: 3px;
+	vertical-align: top;
+	display: inline-block;
+}
+
+#date {
+	height: 105px;
+	@media only screen and (max-width: 768px){
+		height: auto;
+	}
+	border-bottom : 1px dotted #666;
+	padding-top: 2px;
+	padding-bottom: 14px;
+	> span {
+		font-weight: normal;
+		@include font-size(14px);
+		color: #666;
+	}
+	> div {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		> span {
+			display: inline-block;
+			color : #B3B3B3;
+			@include font-size(21px);
+			font-weight: normal;
+			div:nth-of-type(1)
+			{ 
+				margin-top: 4px;
+				@include nascar-sprite(5, 2, 13px, 9px, 0px, -3px, 1);
+				margin-left: auto;
+				margin-right: auto; 
+				cursor: pointer;
+			}
+			div:nth-of-type(2) {
+				margin-top: 4px;
+				@include nascar-sprite(4, 3, 13px, 9px, 0px, -3px, 1);
+				margin-left: auto;
+				margin-right: auto; 
+				cursor: pointer;
+			}
+		}
+	}
+	> div > div {
+		display: inline;
+		@media only screen and (max-width: 768px){
+			display: block;
+			margin-top: 3px;
+		}
+		> span {
+			display: inline-block;
+			@include font-size(21px);
+			font-weight: normal;
+			div:nth-of-type(1)
+			{
+				margin-top: 4px;
+				@include nascar-sprite(5, 2, 13px, 9px, 0px, -3px, 1);
+				margin-left: auto;
+				margin-right: auto; 
+				cursor:pointer;
+			}
+			div:nth-of-type(2) {
+				margin-top: 4px;
+				@include nascar-sprite(4, 3, 13px, 9px, 0px, -3px, 1);
+				margin-left: auto;
+				margin-right: auto; 
+				cursor:pointer;
+			}
+		}
+		span:nth-of-type(1) {
+			font-size: 21px;
+			margin-left: 23px;
+			@media only screen and (max-width: 768px){
+				margin-left: 0px;
+			}
+		}
+		span:nth-of-type(2), span:nth-of-type(4), span:nth-of-type(5) {
+			color: #b3b3b3;
+		}
+		span:nth-of-type(3), span:nth-of-type(4) {
+			font-size: 40px;
+		}
+	}
+	> div span:nth-of-type(1), > div span:nth-of-type(2) {
+		@include font-size(40px);
+	}
+	> div span:nth-of-type(2), > div span:nth-of-type(3) {
+		margin-left: 21px;
+	}
+	> div span:nth-of-type(4), > div span:nth-of-type(5) {
+		margin-left: 23px;
+	}
+	> div span:nth-of-type(6), > div span:nth-of-type(7) {
+		margin-left: 9px;
+	}
+	> div span:nth-of-type(8){
+		margin-left: 18px;
+	}
+	> div span:nth-of-type(4), > div span:nth-of-type(6) {
+		color : #4D4D4D;
+	}
+	> div span:nth-of-type(8) div, > div span:nth-of-type(3) div{
+		margin-top: 9px;
+	}
+}
+
+#add-event {
+	#add-event-wrapper {
+		width: 823px;
+		padding-top: 37px;
+		padding-bottom: 37px;
+		padding-right: 70px; 
+		padding-left: 70px;
+
+		#addnew-header {
+			@media only screen and (max-width: 768px){
+				height:70px !important;
+			}
+			@media only screen and (max-width: 480px){
+				height:auto !important;
+			}
+		}
+		@media only screen and (max-width: 768px){
+			width: 540px;
+			height: auto;
+			padding-bottom: 50px;
+		}
+		@media only screen and (max-width: 480px){
+			width: 310px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-right: 30px;
+			padding-left: 30px;
+		}
+	}
+}
+
+#profile-page 
+{
+	.tiles
+	{
+		width: 67%;
+		@media only screen and (max-width: 988px){
+			width: 490px;
+		}
+		@media only screen and (max-width: 480px){
+			width: 310px;
+		}
+	}
+}
+
+#profile {
+	width: 67%;
+	@media only screen and (max-width: 988px){
+		width: 490px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	@media only screen and (max-width: 480px){
+		width: 310px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	padding-top: 37px;
+	padding-bottom: 37px;
+	padding-right: 70px; 
+	padding-left: 70px; 
+	position: relative;
+	#addnew-header {
+		padding-bottom: 5px;
+		overflow: hidden;
+		@media only screen and (max-width: 988px){
+			height: auto;
+		}
+		#icons, span {
+			float: left;
+			@media only screen and (max-width: 988px){
+				float: right;
+			}
+		}
+		span {
+			cursor: pointer;
+			color: #666;
+			@media only screen and (max-width: 988px){
+				right : 50px;
+				position: absolute;
+			}
+			@media only screen and (max-width: 480px){
+				right: auto;
+				position: relative;
+				float:right;
+			}
+		}
+		#icons {
+			@media only screen and (max-width: 988px){
+				right : auto;
+				position: relative;
+			}
+			@media only screen and (max-width: 480px){
+				float: right;
+				margin-right:3px;
+				margin-top:44px;
+			}
+		}
+	}
+	#profile-name {
+		margin-top: 10px;
+		margin-left: 15px;
+		display: inline-block;
+		@include font-size(28px);
+		@media only screen and (max-width: 988px){
+			font-size: 24px;
+		}
+		@media only screen and (max-width: 480px){
+			font-size: 22px;
+			width: 0px;
+		}
+		font-weight: bold;
+		color: #666;
+	}
+	#icons {
+		float: right;
+	}
+	.profile-description 
+	{
+		div {
+			@include font-size(21px);
+			font-weight: lighter;
+			color: #666;
+			line-height: 30px;
+		}
+		span {
+			display: inline-block;
+			color: #666;
+			font-weight: normal;
+		}
+		input {
+			margin-left: 5px;
+			width: 200px;
+			display: inline-block;
+		}
+	}
+	#index-photos {
+		height: 40px;
+		position: relative;
+		border-bottom: 1px dotted #666;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		span:nth-of-type(1) {
+			@include font-size(21px);
+			font-weight:lighter;
+			color:#666;
+		}
+		span:nth-of-type(2) {
+			position: absolute;
+			right: 0px;
+			top: 8px;
+			span {
+				@include font-size(14px);
+				font-weight:normal;
+				color:#b3b3b3;
+				position: absolute;
+				right: 22px;
+				bottom: 3px;
+				width: 51px;
+			}
+			div {
+				@include nascar-sprite(5, 3, 15px, 20px, 0px, 0px, 0.8);
+				display: inline-block;
+			}
+		}
+	}
+	#addgroup-confirm
+	{ 
+		display: inline-block;
+		width: 100%;
+		span {
+			float: right;
+			position:relative;
+			right: auto;
+		}
+	}
+}
+
+.remove-post {
+	width: 190px;
+	@media only screen and (max-width: 768px){
+		width: auto;
+		padding: 5px;
+		right: 10px;
+		top: 5px;
+		span {
+			font-size: 16px;
+		}
+	}
+	background-color: #CC3333;
+	text-align: center;
+	position: absolute;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	right: 10px;
+	top: 10px;
+	span {
+		color: #fff;
+		@include font-size(24px);
+		@media only screen and (max-width: 768px){
+			font-size: 20px;
+		}
+		@media only screen and (max-width: 480px){
+			font-size: 18px;
+		}
+	}
+}
+
+.editprofile {
+	//margin-top: 152px;
+}
+
+.active {
+	display: block !important;
+}
+
+#input-name {
+	margin-top: 5px;
+	display: inline;
+}
+
+#input-groupname {
+	border: none;
+	color : #666;
+	@include font-size(28px);
+	font-weight: bold;
+	margin-left: 12px;
+	margin-top: 12px;
+}
+
+#input-firstname {
+	border: none;
+	color : #666;
+	@include font-size(28px);
+	font-weight: bold;
+	margin-left: 12px;
+	margin-top: 12px;
+	width:164px;
+}
+
+#input-lastname {
+	border: none;
+	color : #666;
+	@include font-size(28px);
+	font-weight: bold;
+	margin-left: 12px;
+}
+
+#input-firstname:focus, #input-lastname:focus {
+	outline: none;
+}
+
+input#input-firstname::-webkit-input-placeholder, input#input-lastname::-webkit-input-placeholder{
+	color:#B3B3B3;
+}
+#profile #addgroup-confirm .addgroup-buttons {
+	right: 190px;
+	color: #666;
+	@include font-size(21px);
+	margin-top: 5px;
+}
+
+#people {
+	#people-wrapper {
+		width: 980px;
+		@media only screen and (max-width: 1000px){
+			width: 86%;
+		}
+		@media only screen and (max-width: 550px){
+			width: 235px;
+		}
+		@media only screen and (max-width: 768px){
+			padding-top: 0px;
+		}
+		padding-top: 52px;
+		margin-left: auto;
+		margin-right: auto;
+		#all-people
+		{
+			@media only screen and (max-width: 1000px){
+				margin-left: auto;
+				margin-right: auto;
+				width: 478px;
+				@media only screen and (max-width: 550px){
+					width: 235px;
+				} 
+			}
+		}
+	}
+	#filters {
+		.filter_active {
+			color: #662E91;
+			font-weight: 400;
+		}
+		.filter {
+		}
+		margin-bottom: 48px;
+		position: relative;
+		@media only screen and (max-width: 1000px){
+			margin-left: auto;
+			margin-right: auto;
+			width:476px
+		}
+		@media only screen and (max-width: 550px){
+			width: 235px;
+		}
+		.filter {
+			cursor: pointer;
+			width: 233px;
+			background-color: #fff;
+			text-align: center;
+			border-bottom: 1px #b3b3b3 solid;
+			margin-right: 3px;
+			padding-top: 15px;
+			padding-bottom: 15px !important;
+			font-weight: lighter;
+			@include font-size(24px);
+			color: #b3b3b3;
+			display: inline-block;
+			vertical-align: top;
+			position: relative;
+			width: 233px !important;
+			span:nth-of-type(1){
+				display: inline-block;
+				vertical-align: top;
+			}
+		}
+		.input-filter-wrapper {
+			display: inline-block;
+		}
+		.input-filter
+		{
+			height: 59px;
+			display: inline-block;
+			padding: 0px;
+			border-top: 2px solid #b3b3b3;
+			background-color: #fff;
+			width: 473px !important;
+			@media only screen and (max-width: 1000px){
+				margin-top: 22px;
+			}
+			@media only screen and (max-width: 550px){
+				width: 233px !important;
+			}
+			display: table;
+			.magn-glass {
+				display: table-cell;
+			}
+			#input-wrapper {
+				display:table-cell;
+			}
+			input {
+				border: none;
+				height: 56px !important;
+				font-weight: lighter;
+				@include font-size(24px);
+				color: #666;
+				display: inline-block;
+				padding: 0px !important;
+				width: 100%;
+			}
+			input:focus {
+				outline: none;
+			}
+			input::-webkit-input-placeholder {
+				font-weight: lighter;
+				@include font-size(24px);
+				color: #b3b3b3;
+			}
+		}
+	}
+}
+
+.arrow-filter {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 7px 7px 0 7px;
+	border-color: #b3b3b3 transparent transparent transparent;
+	position: absolute;
+	top: 30px;
+	right: 18px;
+	cursor: pointer;
+}
+
+#sort-drop {
+	background-color: #fff;
+	padding-top: 0px !important;
+	padding-bottom: 17px !important;
+	position: absolute !important;
+	z-index: 4;
+	width: 233px;
+	border-bottom: 2px solid #b3b3b3;
+	@media only screen and (max-width: 1000px){
+		margin-top:-80px;
+	}
+	@media only screen and (max-width: 480px){
+		margin-top:-157px;
+	}
+	div {
+		cursor: pointer;
+		display: inline-block;
+		font-weight: lighter;
+		@include font-size(24px);
+		color: #b3b3b3;
+		display: block !important;
+		border: 0px !important;
+		padding-left: 30px !important;
+		padding-top: 17px !important;
+		text-align: left !important;
+	}
+
+}
+
+#alphabet-drop {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	position: absolute !important;
+	background-color: #fff;
+	z-index: 4;
+	top: 60px;
+	left: 239px;
+	width: 233px;
+	border-bottom: 2px solid #b3b3b3;
+	@media only screen and (max-width: 480px){
+		margin-top: 56px;
+		margin-left: -239px;
+	}
+	div {
+		display: block !important;
+		border: 0px !important;
+		padding-left: 30px !important;
+		padding-top: 17px !important;
+		text-align: left !important;
+		span {
+			cursor:pointer;
+		}
+	}
+}
+
+#alphabet-wrapper
+{
+	display: inline-block;
+	text-align: center;
+	padding-right: 30px;
+	padding-bottom: 17px !important;
+	span {
+		font-weight: lighter;
+		@include font-size(24px);
+		color: #b3b3b3;
+		width: 26px;
+		height: 26px;
+		display: inline-block;
+		margin-right: 2px;
+		text-align: center;
+		margin-bottom: 3px;
+	}
+	span:nth-of-type(25) {
+		margin-left: 56px;
+	}	
+}
+
+.person {
+	width: 233px;
+	background-color: #fff;
+	text-align: center;
+	padding-top: 24px;
+	font-weight: lighter;
+	@include font-size(24px);
+	color: #666;
+	height: 219px;
+	display: inline-block;
+	margin-right: 4px;
+	margin-bottom: 7px;
+	vertical-align: top;
+	div.round-pict {
+		width: 64px;
+		height: 64px;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		margin-bottom: 13px;
+	}
+	div:nth-of-type(3), div:nth-of-type(4)
+	{
+		@include font-size(14px);
+	}
+}
+
+#photos {
+	#photo-wrapper {
+		width: 973px;
+		@media only screen and (max-width: 1000px){
+			width: 646px;
+		}
+		@media only screen and (max-width: 680px){
+			width: 323px;
+		}
+		margin-right: auto;
+		margin-left: auto;
+		position: relative;
+		margin-top: 30px;
+	}
+	#search-photos {
+		border-top: 2px #b3b3b3 solid;
+		background-color: #fff;
+		width: 98%;
+		display:table;
+		.magn-glass {
+			display:table-cell;
+		}
+		@media only screen and (max-width: 680px){
+			margin-left:6px;
+			width: 310px;
+			right: auto;
+		}
+		#input-wrapper
+		{
+			display:table-cell;
+			input {
+				border: none;
+				height: 58px !important;
+				font-weight: lighter;
+				@include font-size(24px);
+				color: #666;
+				display: inline-block;
+				padding: 0px !important;
+				width: 100%;
+			}
+			input:focus {
+				outline: none;
+			}
+			input::-webkit-input-placeholder {
+				font-weight: lighter;
+				@include font-size(24px);
+				color: #b3b3b3;
+			}
+		}
+	}
+	#group-photos {
+		padding-top: 30px;
+		display: inline-block;
+		> div {
+			> div {
+				position: relative;
+				display: inline-block;
+			}
+			float: left;
+			position : relative;
+			width: 323px;
+			div.photo-detail {
+				cursor: pointer;
+				position: absolute;
+				top: 10px;
+				right: 24px;
+				color: #fff;
+				display: none;
+				.white-comments {
+					margin-right:5px;
+				}
+				.white-likes {
+					margin-right:5px;
+				}
+				span {
+					text-shadow: 2px 2px 1px #000;
+					margin-right:15px;
+					margin-left:7px;
+				}
+			}
+			div.act-photo {
+				display: inline-block;
+				width: 310px;
+				float: left;
+				margin-right: 13px;
+				margin-bottom: 13px;
+				background-position: 50% 25%;
+				background-size: cover;
+				-webkit-transition-duration: 500ms;
+				-webkit-transition-property: width, height;
+				@media only screen and (max-width: 680px){
+					margin-left:6px;
+				}
+			}
+		}
+	}
+}
+
+.column-left{
+	float: left;
+	width: 33%;
+}
+.column-right{
+	float: right;
+	width: 33%;
+}
+.column-center{
+	display: inline-block;
+	width: 33%;
+}
+
+.like-icon {
+	@include nascar-sprite(3, 0, 12px, 10px, 0px, 0px, 0.5);
+	display:inline-block;
+}
+
+.red_like {
+	@include nascar-sprite(3, 1, 12px, 10px, 0px, 0px, 0.5);
+	display:inline-block;
+}
+
+.comments-icon {
+	@include nascar-sprite(2, 0, 13px, 10px, -1px, 0px, 0.5);
+	display:inline-block;
+}
+
+.green_comment {
+	@include nascar-sprite(2, 1, 13px, 10px, -1px, 0px, 0.5);
+	display:inline-block;
+}
+.big-like-icon {
+	@include nascar-sprite(3, 0, 15px, 14px, 0px, 0px, 0.7);
+	display:inline-block;
+}
+
+.big-comments-icon {
+	@include nascar-sprite(2, 0, 16px, 14px, 0px, 0px, 0.7);
+	display:inline-block;
+}
+
+.white-comments {
+	@include nascar-sprite(3, 2, 15px, 12px, 0px, 0px, 0.6);
+	display:inline-block;
+}
+
+.white-likes {
+	@include nascar-sprite(4, 2, 15px, 12px, 0px, 0px, 0.6);
+	display:inline-block;
+}
+
+.share-icon {
+	@include nascar-sprite(4, 0, 12px, 11px, -1px, 0px, 0.5);
+	display:inline-block;
+}
+
+.popup {
+	top: 50%;
+	left:50%;
+	max-height: 80%;
+	position: fixed;
+	z-index: 4;
+	width: 100%;
+	display:none;
+	padding-bottom:0px;
+	#photo-container {
+		float:left;
+		text-align: center;
+		position:absolute;
+		background-color:#000;
+		width:60%;
+		height:100%;
+		> div {
+			display:inline-block;
+			height:100%;
+			max-width:100%;
+		}
+		@media only screen and (max-width: 768px){
+			float:none;
+			width:100%;
+			position:relative;
+			display:block;
+		}
+		#popup-photo {
+			max-height:100%;
+			max-width: 100%;
+		}
+		.comments-details {
+			width:50%;
+		}
+		#comments-details-container {
+			margin-left:auto;
+			margin-right:auto;
+			margin-top: -34px;
+			width:170px;
+			span {
+				margin-left:10px;
+			}
+			.white-comments {
+				margin-left:30px;
+			}
+			position: relative;
+			bottom: 0px;
+			color: #fff;
+		}
+	}
+	#comment-input-container
+	{
+		font-size:0px;
+		padding-top: 10px;
+		#text-container
+		{
+			height: 120px;
+			@media only screen and (min-width: 950px){
+				width: 94%;
+			}
+			width:89%;
+			display: inline-block;
+			@media only screen and (max-width: 768px){
+				display:block;
+				width:100%;
+				position:relative;
+			}
+		}
+		form {
+			margin-top: 5px;
+			position: relative;
+		}
+		textarea {
+			height:100%;
+			width: 100%;
+			border: 1px solid #b3b3b3;
+				//margin-left: 20px;
+				font-size:17px;
+				resize: none;
+				font-family: Lato;
+				left:auto;
+				color:b3b3b3;
+				line-height: 1.5em;
+				padding-left: 8px;
+				padding-top: 8px;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				width: 100%;
+			}
+			input {
+				height: 100%;
+				background: none;
+				border: none;
+				background-color: #79BC2F;
+				position: relative;
+				padding-top: 53px;
+				padding-bottom: 53px;
+				vertical-align: top;
+				padding-left: 12px;
+				padding-right: 12px;
+				color: #fff;
+				margin-left: 5px;
+				cursor: pointer;
+				right: 0px;
+				margin-left: 5px;
+				display: inline-block;
+				font-size: 17px;
+				position:absolute;
+				top:0px;
+				@media only screen and (max-width: 768px){
+					display:block;
+					width:100%;
+					position:relative;
+					margin-left:0px;
+					padding-top: 10px;
+					padding-bottom: 10px;
+					width: 50%;
+					margin: 0 auto;
+					margin-top: 10px;
+				}
+			}
+			input:focus {
+				outline:none;
+			}
+		}
+		textarea:focus {
+			outline: none;
+		}
+		textarea::-webkit-input-placeholder{
+			font-family: Lato;
+			line-height: 1.5em;
+		}
+		#photo-comments-container {
+			width:40%;
+			padding: 0px 20px 0px 20px;
+			background-color:#fff;
+			height: 100%;
+			float:right;
+			overflow:auto;
+			border-bottom: 1px dotted #666;
+			@media only screen and (max-width: 768px){
+				display:block;
+				width:100%;
+				position:relative;
+				overflow: hidden;
+				height: auto;
+			}	
+			> div {
+				overflow:scroll;
+				height:100%;
+			}
+			.photo-title {
+				font-weight: normal;
+				font-size: 20px;
+				padding: 5px;
+			}
+			.photo-by {
+				font-weight: lighter;
+				font-size: 15px;
+				padding: 5px;
+				color: #aaa;
+			}
+			.photo-description {
+				font-size: 18px;
+				padding: 5px;
+				font-weight: lighter;
+			}
+			.article-link {
+				padding: 5px;
+			}
+		}
+		.comments-details{
+			border-bottom: 1px dotted #666;
+			padding-bottom:5px;
+			#comments-details-container {
+				left: 50%;
+				margin-top: 10px;
+				margin-left: -60px;
+				position: relative;
+				width: 170px;
+				span {
+					margin-left:10px;
+				}
+				.big-comments-icon {
+					margin-left:30px;
+				}
+			}
+			#comment-name{	
+				display: table-cell;
+				vertical-align: middle;
+				padding-left: 10px;
+				font-size: 17px;
+			}
+		}
+		.comments-container {
+			margin-left:auto;
+			margin-right:auto;
+			position: relative;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			color:#666;
+			font-size: 17px;
+			width:100%;
+			border-bottom: 1px dotted #666;
+			.comments-details{
+				border: none;
+				width: 100%;
+				display: table;
+			}
+			> div.round-pict {
+				display: inline-block;
+				vertical-align: top;
+			}
+			> div#comment {
+				display: inline-block;
+				vertical-align: top;
+				margin-top: 5px;
+				margin-left: 5px;
+				width:83%;
+			}
+			.comment {
+				display:block;
+				margin-left : 78px;
+				font-weight: lighter;
+			}
+			.tiles-pict{
+				top: 20px;
+				left: 0px;
+				display: table-cell;
+
+			}
+		}
+	}
+
+	.inline-block {
+		display:inline-block;
+	}
+
+	#photos {
+		.popup {
+			@media only screen and (max-width: 768px){
+				overflow:scroll;
+			}	
+		}
+	}
+	.fixfixed { 
+		position: absolute !important; 
+	} 
+
+	#popup-header {
+		border-bottom: 1px #666 dotted;
+		padding-bottom: 10px;
+		text-align:center;
+		#pict-name {
+			display:block;
+			text-align: center;
+		}
+		@media only screen and (max-width: 768px){
+			#pict-name {
+				display: block;
+			}
+			text-align:center;
+			.round-pict {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+	.popup {
+		#add-group-popup-wrapper {
+			background-color:#fff;
+		}
+		#wrapper-photo-popup {
+			position: relative;
+			height: 80%;
+		}
+		min-width:290px;
+		#comments-popup {
+			overflow: auto;
+			#comments-wrapper{
+				overflow-y: scroll;
+				background-color: #fff;
+				> div {
+					margin-top: 5%;
+					margin-left: 7%;
+					margin-right: 7%;
+					padding-bottom: 18px;
+					> div {
+						div.title-container {
+							vertical-align: middle;
+						}
+					}
+				}
+			}
+			#post-comments {
+				margin-top:20px !important;
+			}
+			/* background-color: #fff; */
+			/* margin-top: 95px; */
+		}
+		#share-popup {
+			font-size:0px;
+			height:100%;
+			#share-wrapper {
+				height: auto;
+				background-color: #fff;
+				padding: 20px;
+			}
+			#popup-title{
+				font-family: Lato;
+				font-size: 20px;
+				width: 107%;
+				margin-left: auto;
+				margin-right: auto;
+				color: #b3b3b3;
+				/* height: 70px; */
+				/* padding-top: 20px; */
+				margin-bottom: 17px;
+			}
+			#social-logos {
+				padding-top: 20px;
+				padding-bottom: 20px;
+				border-top: 1px solid #666;
+				border-bottom: 1px solid #666;
+				text-align: center;
+				#facebook-logo {
+					@include nascar-sprite(6, 2, 20px, 25px, 2px, -3px, 1);
+					display:inline-block;
+					vertical-align: top;
+					margin-left:50px;
+				}
+				#twitter-logo {
+					@include nascar-sprite(6, 3, 28px, 25px, 7px, 1px, 1);
+					display:inline-block;
+					vertical-align: top;
+				}
+				#google-logo {
+					@include nascar-sprite(0, 0, 24px, 25px, 0px, 2px, 1);
+					display:inline-block;
+					vertical-align: top;
+					margin-left:40px;
+				}
+			}
+			#ok-button {
+				/* position: fixed; */
+				width: 100%;
+				/* bottom: 0px; */
+				height: 41%;
+				input[type="button"] {
+					display: block;
+					margin-left:auto;
+					margin-right:auto;
+					background-color:#79BC2F;
+					border:none;
+					padding-left:50px;
+					padding-right:50px;
+					padding-top:10px;
+					padding-bottom:10px;
+					cursor: pointer;
+					margin-top:30px;
+					font-family: Lato;
+					font-size:20px;
+					color:#fff;
+				}
+				input[type="button"]:focus {
+					outline:none;
+				}
+			}
+		}
+		#close-button{
+			z-index:10;
+			width:100%;
+			bottom:0px;
+			height:16%;
+			border-top:1px #666 solid;
+			margin:0px !important;
+			background-color:#fff;
+			@media only screen and (max-width: 768px){
+				display:block;
+			}
+			input[type="button"] {
+				display: block;
+				margin-left:auto;
+				margin-right:auto;
+				background-color:#79BC2F;
+				border:none;
+				padding-left:50px;
+				padding-right:50px;
+				padding-top:10px;
+				padding-bottom:10px;
+				cursor: pointer;
+				margin-top:26px;
+				font-family: Lato;
+				font-size:20px;
+				color:#fff;
+			}
+			input[type="button"]:focus {
+				outline:none;
+			}
+		}
+		#likes-popup {
+			width:100%;
+			#like-wrapper{
+				background-color:#fff;
+				max-height: 620px;
+
+			}
+			.round-pict {
+				position:static;
+			}
+			.comments-container {
+				margin-left: 20px;
+				margin-right: 20px;
+				width:auto;
+			}
+			#comment-name {
+				margin-left: 10px;
+				margin-top: 22px;
+			}
+			.comments-details {
+				padding-left:0px;
+			}
+			#likes {
+				overflow:scroll;
+				max-height: 620px;
+			}
+		}
+		#photo-add {
+			#photo-container {
+				font-size:0px;
+				width:100%;
+			}
+			#remove-button {
+				background-color: #D4000E;
+				position:absolute;
+				top: 10px;
+				right: 10px;
+				width: 30px;
+				height: 30px;
+				border-radius: 30%;
+				font-size: 24px;
+				cursor: pointer;
+			}
+		}
+		#add-group-popup {
+			height:100%;
+			overflow: scroll;
+			width: 290px;
+			#allgroups {
+				height: 84%;
+			}
+			.round-pict {
+				position:static;
+			}
+			.comments-container {
+				margin-left: 20px;
+				margin-right: 20px;
+				width:auto;
+			}
+			#comment-name {
+				width:100px;
+				margin-left: 10px;
+				margin-top: 22px;
+			}
+			.comments-details {
+				padding-left:0px;
+				margin-left:auto;
+				margin-right:auto;
+				width:90%;
+				#checkgroups {
+					display:inline-block;
+					margin-top: 25px;
+					float: right;
+					input[type="checkbox"] {
+						width: 15px;
+						height: 15px;
+						border: 1px solid #666;
+						cursor:pointer;
+					}
+					input[type="checkbox"]:focus {
+						outline: none;
+					}
+					div {
+						cursor:pointer;
+						position:absolute;
+						margin-left: 3px;
+						margin-top: -22px;
+						@include nascar-sprite(0, 1, 13px, 13px, 0px, 0px, 0.5);
+					}
+				}
+			}
+			#close-button{
+				background-color: #fff;
+				position:fixed;
+				width:100%;
+				bottom:0px;
+				height:16%;
+				border-top:1px #666 solid;
+				input[type="button"] {
+					display: block;
+					margin-left:auto;
+					margin-right:auto;
+					background-color:#79BC2F;
+					border:none;
+					padding-left:50px;
+					padding-right:50px;
+					padding-top:10px;
+					padding-bottom:10px;
+					cursor: pointer;
+					margin-top:30px;
+					font-family: Lato;
+					font-size:20px;
+					color:#fff;
+				}
+				input[type="button"]:focus {
+					outline:none;
+				}
+			}
+		}
+	}
+	#allNotification {
+
+		.article-container {
+			div {
+				display: inline-block;
+			}
+			.allnotif {
+				display:inline-block;
+			}
+		}
+	}
+
+	#loader {
+		margin-top: 54px;
+		margin-right: auto;
+		margin-left: auto;
+		width: 60px;
+		height: 60px;
+		display:block;
+	}
+
+	#top-story {
+		float:left;
+		background-color: transparent;
+		cursor: pointer;
+		padding: 5px;
+		border: 1px #666 solid;
+	}
+
+	#round-close {
+		border-radius: 50%;
+		border: 1px #fff solid;
+		color: #fff;
+		font-family: 'Lato', sans-serif;
+		font-weight: lighter;
+		position: absolute;
+		right: -60px;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		font-size: 17px;
+		cursor: pointer;
+		@media only screen and (max-width: 768px){
+			display:none;
+		}
+	}
+	#resp-round-close {
+		position: absolute;
+		left: 50%;
+		top: 4px;
+		div {
+			width: 40px;
+			height: 40px;
+			position:relative;
+			left: -50%;
+			border-radius: 50%;
+			border: 1px #666 solid;
+			color: #666;
+			font-family: 'Lato', sans-serif;
+			font-weight: lighter;
+			text-align: center;
+			line-height: 40px;
+			font-size: 17px;
+			cursor: pointer;
+		}
+		@media only screen and (min-width: 768px){
+			display:none;
+		}	
+	}
+	#pagination-wrapper {
+		background-color: transparent;
+		font-family: 'Lato', sans-serif;
+		font-weight: lighter;
+		color: #666;
+		#pagination {
+			margin-right: auto;
+			margin-left: auto;
+			float:right;
+			#next, #previous {
+				padding: 5px;
+				font-size: 0px;
+				display:inline-block;
+				vertical-align: top;
+				div.pagination-arrow {
+					@include nascar-sprite(5, 3, 10px, 16px, 0px, 0px, 0.8); 
+					display:inline-block;
+					vertical-align:top;
+				}
+			}
+			#next div.pagination-arrow {
+				float:right;
+				margin-top:5px;
+				margin-left: 5px;
+			}
+			#previous div.pagination-arrow {
+				@include rotate(180deg);
+				margin-top:7px;
+			}
+			a {
+				font-size: 19px;
+				display:inline-block;
+				vertical-align:top;
+				margin-left:5px;
+				color: #666;
+			}
+		}
+	}
+
+#go_down {
+	@media only screen and (min-width: 768px){
+		display:none;
+	}
+	cursor: pointer;
+	right:10px;
+	bottom:10px;
+	position:absolute;
+	border: 1px #666 solid;
+	padding: 5px 10px;
+	span {
+		@include rotate(90deg);
+		@include nascar-sprite(5, 3, 15px, 21px, -1px, -2px, 1.1); 
+	}
+}
+
+.all-groups-icon {
+	@include nascar-sprite(4, 4, 44px, 44px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+.protected-icon {
+	@include nascar-sprite(3, 4, 30px, 30px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+.protected-icon-green {
+	@include nascar-sprite(3, 5, 30px, 30px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+
+.open-icon {
+	@include nascar-sprite(2, 4, 30px, 30px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+.open-icon-green {
+	@include nascar-sprite(2, 5, 30px, 30px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+.private-icon {
+	@include nascar-sprite(1, 3, 30px, 30px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+.private-icon-green {
+	@include nascar-sprite(1, 4, 30px, 30px, 0px, 0px, 1); 
+	display:inline-block;
+}
+
+.shadow-red-like {
+	@include nascar-sprite(5, 5, 20px, 16px, 0px, 0px, 0.6);
+	display: inline-block;
+}
+
+.shadow_green_comment {
+	@include nascar-sprite(4, 5, 20px, 16px, 0px, 0px, 0.6);
+	display: inline-block;
+}
+
+.privacy {
+	font-size: 20px;
+	line-height: 30px;
+	margin-left: 5px;
+	display: inline-block;
+	color: #666;
+	cursor: pointer;
+	vertical-align: top;
+}
+
+.privacy-active {
+	cursor: pointer;
+	color:#79BC2E;
+	display: inline-block;
+	vertical-align: top;
+}
+
+
+#privacy-title {
+	font-size: 17px;
+	color: #666;
+	font-weight: lighter;
+	padding-top: 17px;
+}
+
+#joinGroup {
+	padding: 0px 5px;
+	background-color: #79BC2E;
+	cursor: pointer;
+	margin-right: 10px;
+	a {
+		color: #fff !important;
+	}
+}
+
+#leaveGroup {
+	padding: 0px 5px;
+	background-color: #C1272D;
+	cursor: pointer;
+	margin-right: 10px;
+	a {
+		color: #fff !important;
+	}
+}
